@@ -109,6 +109,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   isTermsAccepted = value;
                   setState(() {});
                 },
+                isAccepted: isTermsAccepted,
               ),
               const SizedBox(height: 33),
             ],

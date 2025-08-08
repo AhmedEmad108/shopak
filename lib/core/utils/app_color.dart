@@ -9,13 +9,14 @@ abstract class AppColor {
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;
   static const Color green = Colors.green;
-  static const Color green2 =  Color.fromARGB(255, 119, 165, 121);
+  static const Color green2 = Color.fromARGB(255, 119, 165, 121);
   static Color grey900 = Colors.grey.shade900;
   static const Color grey2 = Color(0xff4E5556);
   static const Color grey3 = Color(0xffF3F5F7);
   static const Color grey3Dark = Color(0xff171717);
   static const Color grey400 = Color(0xff949D9E);
   static const Color grey5 = Color(0xFFEEEEEE);
+  static const Color grey6 = Color(0xFFDCDEDE);
   static const Color red = Colors.red;
   static const Color orange = Color(0xffFFA500);
   static const Color textColor = Color(0xff064061);

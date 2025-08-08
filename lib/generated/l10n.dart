@@ -482,10 +482,10 @@ class S {
     );
   }
 
-  /// `our Terms of Service and Privacy Policy.`
+  /// `Terms & Conditions`
   String get terms_and_condition2 {
     return Intl.message(
-      'our Terms of Service and Privacy Policy.',
+      'Terms & Conditions',
       name: 'terms_and_condition2',
       desc: '',
       args: [],

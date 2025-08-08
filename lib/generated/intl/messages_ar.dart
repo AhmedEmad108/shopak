@@ -318,8 +318,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "تحدد هذه الشروط والأحكام القواعد والضوابط الخاصة باستخدام تطبيقنا.\n\nبدخولك إلى هذا التطبيق، نعتبر أنك توافق على هذه الشروط والأحكام. إذا لم توافق على جميع الشروط والأحكام المذكورة في هذه الصفحة، يرجى عدم الاستمرار في استخدام التطبيق.\n\n- الاستخدام: التطبيق مخصص للاستخدام الشخصي فقط.\n- الخصوصية: نحن ملتزمون بحماية خصوصيتك. سيتم التعامل مع بياناتك وفقًا لسياسة الخصوصية الخاصة بنا.\n- المسؤولية: نحن غير مسؤولين عن أي أضرار تنتج عن استخدام هذا التطبيق.\n- التعديلات: نحتفظ بحق تعديل أو تحديث هذه الشروط والأحكام في أي وقت.\n- الإيقاف: يجوز لنا إيقاف التطبيق في أي وقت دون إشعار مسبق.\n\nشكرًا لاستخدامك تطبيقنا!"),
         "terms_and_condition1":
             MessageLookupByLibrary.simpleMessage("بالتسجيل فإنك توافق على "),
-        "terms_and_condition2": MessageLookupByLibrary.simpleMessage(
-            "شروط الخدمة وسياسة الخصوصية."),
+        "terms_and_condition2":
+            MessageLookupByLibrary.simpleMessage("الشروط والأحكام"),
         "terms_and_conditions":
             MessageLookupByLibrary.simpleMessage("الشروط والأحكام"),
         "update": MessageLookupByLibrary.simpleMessage("تحديث"),

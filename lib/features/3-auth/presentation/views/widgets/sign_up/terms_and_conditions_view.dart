@@ -8,9 +8,8 @@ import 'package:shopak/features/3-auth/presentation/views/sign_up_view.dart';
 import 'package:shopak/generated/l10n.dart';
 
 class TermsAndConditionsView extends StatefulWidget {
-  const TermsAndConditionsView({super.key, required this.onChecked});
+  const TermsAndConditionsView({super.key});
   static const routeName = '/termsAndConditionsPage';
-  final ValueChanged<bool> onChecked;
 
   @override
   State<TermsAndConditionsView> createState() => _TermsAndConditionsViewState();
@@ -48,9 +47,7 @@ class _TermsAndConditionsViewState extends State<TermsAndConditionsView> {
                   color: AppColor.white,
                 ),
                 onTap: () {
-                  widget.onChecked(true);
-                  setState(() {});
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 },
               ),
             ],

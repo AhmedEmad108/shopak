@@ -29,6 +29,8 @@
 
 
 
+
+
     "signin": "Sign In",
     "signup": "Sign Up",
     "name": "User Name",
@@ -64,7 +66,7 @@
     "or": "   OR SIGN IN WITH   ",
     "please_accept_terms_and_conditions": "Please accept terms and conditions",
     "password_and_confirm_password_not_match": "Password and confirm password not match",
-
+    "successfully_signed_in": "Successfully signed in",
     "sign_up": "Sign Up",
     "successfully_created_account": "Successfully created account",
     

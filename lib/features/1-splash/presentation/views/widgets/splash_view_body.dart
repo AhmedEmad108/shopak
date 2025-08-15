@@ -5,6 +5,7 @@ import 'package:shopak/core/services/shared_prefrences_singletone.dart';
 import 'package:shopak/core/utils/app_images.dart';
 import 'package:shopak/features/2-on_boaring/presentation/views/on_boarding_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_in_view.dart';
+import 'package:shopak/features/4-main_view/presentation/views/main_view.dart';
 import 'package:shopak/generated/l10n.dart';
 import 'package:svg_flutter/svg.dart';
 
@@ -43,11 +44,14 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   void excuteNavigation() {
     Future.delayed(const Duration(seconds: 3), () {
       bool isOnBoardingViewSeen = Prefs.getBool(kIsOnBoardingViewSeen);
-      var isLoggedIn = false;
-      // FirebaseAuth.instance.currentUser != null;
+      var isLoggedIn = FirebaseAuth.instance.currentUser != null;
       if (isOnBoardingViewSeen) {
         if (isLoggedIn) {
-          
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            MainView.routeName,
+            (route) => false,
+          );
         } else {
           Navigator.pushNamedAndRemoveUntil(
             context,

@@ -4,6 +4,7 @@ import 'package:shopak/features/2-on_boaring/presentation/views/on_boarding_view
 import 'package:shopak/features/3-auth/presentation/views/sign_in_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_up_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/widgets/sign_up/terms_and_conditions_view.dart';
+import 'package:shopak/features/4-main_view/presentation/views/main_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -18,9 +19,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     // case (TermsAndConditionsView.routeName):
     //   return MaterialPageRoute(
     //     builder: (context) => const TermsAndConditionsView(),
-      // );
-    // case (MainView.routeName):
-    //   return MaterialPageRoute(builder: (context) => const MainView());
+    // );
+    case (MainView.routeName):
+      return MaterialPageRoute(builder: (context) => const MainView());
 
     // case (CheckEmailView.routeName):
     //   return MaterialPageRoute(builder: (context) => const CheckEmailView());

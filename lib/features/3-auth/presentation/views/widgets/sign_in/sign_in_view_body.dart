@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopak/contants.dart';
 import 'package:shopak/core/helper_functions/valid_input.dart';
 import 'package:shopak/core/utils/app_color.dart';
@@ -7,6 +8,7 @@ import 'package:shopak/core/utils/app_style.dart';
 import 'package:shopak/core/widgets/custom_button.dart';
 import 'package:shopak/core/widgets/custom_password_text_field.dart';
 import 'package:shopak/core/widgets/custom_text_field.dart';
+import 'package:shopak/features/3-auth/presentation/cubit/signin_cubit/sign_in_cubit.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_up_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/widgets/sign_in/have_or_dont_have_accont.dart';
 import 'package:shopak/generated/l10n.dart';
@@ -106,10 +108,10 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               onTap: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  // context.read<SignInCubit>().signInWithEmailAndPassword(
-                  //   email: emailController.text,
-                  //   password: passwordController.text,
-                  // );
+                  context.read<SignInCubit>().signInWithEmailAndPassword(
+                    email: emailController.text,
+                    password: passwordController.text,
+                  );
                 } else {
                   autoValidateMode = AutovalidateMode.always;
                   setState(() {});

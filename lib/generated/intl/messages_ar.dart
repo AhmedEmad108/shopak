@@ -227,7 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "password_and_confirm_password_not_match":
             MessageLookupByLibrary.simpleMessage(
-                "كلمة المرور وتأكيد كلمة المرور لا تتطابق"),
+                "كلمة المرور وتأكيد كلمة المرور غير متطابقين"),
         "password_updated_failed":
             MessageLookupByLibrary.simpleMessage("فشل تحديث كلمة المرور"),
         "password_updated_successfully":
@@ -314,6 +314,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "ابدأ رحلة التسوق الخاصة بك مع شوبك"),
         "successfully_created_account":
             MessageLookupByLibrary.simpleMessage("تم انشاء الحساب بنجاح"),
+        "successfully_signed_in":
+            MessageLookupByLibrary.simpleMessage("تم تسجيل الدخول بنجاح"),
         "terms": MessageLookupByLibrary.simpleMessage(
             "تحدد هذه الشروط والأحكام القواعد والضوابط الخاصة باستخدام تطبيقنا.\n\nبدخولك إلى هذا التطبيق، نعتبر أنك توافق على هذه الشروط والأحكام. إذا لم توافق على جميع الشروط والأحكام المذكورة في هذه الصفحة، يرجى عدم الاستمرار في استخدام التطبيق.\n\n- الاستخدام: التطبيق مخصص للاستخدام الشخصي فقط.\n- الخصوصية: نحن ملتزمون بحماية خصوصيتك. سيتم التعامل مع بياناتك وفقًا لسياسة الخصوصية الخاصة بنا.\n- المسؤولية: نحن غير مسؤولين عن أي أضرار تنتج عن استخدام هذا التطبيق.\n- التعديلات: نحتفظ بحق تعديل أو تحديث هذه الشروط والأحكام في أي وقت.\n- الإيقاف: يجوز لنا إيقاف التطبيق في أي وقت دون إشعار مسبق.\n\nشكرًا لاستخدامك تطبيقنا!"),
         "terms_and_condition1":

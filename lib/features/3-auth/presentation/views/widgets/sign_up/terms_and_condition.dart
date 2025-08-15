@@ -20,6 +20,20 @@ class CustomTermsAndCondition extends StatefulWidget {
 
 class _CustomTermsAndConditionState extends State<CustomTermsAndCondition> {
   bool isTermsAccepted = false;
+  void handleCheckboxChange(bool? value) async {
+    if (!widget.isAccepted) {
+      final result = await Navigator.push<bool>(
+        context,
+        MaterialPageRoute(builder: (_) => TermsAndConditionsView(isAccepted: widget.isAccepted,)),
+      );
+      if (result == true) {
+        widget.onChanged(true);
+      }
+    } else {
+      widget.onChanged(false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -35,7 +49,8 @@ class _CustomTermsAndConditionState extends State<CustomTermsAndCondition> {
           scale: 1.5,
           child: Checkbox(
             value: widget.isAccepted,
-            onChanged: (value) => widget.onChanged(value ?? false),
+            onChanged: handleCheckboxChange,
+            // onChanged: (value) => widget.onChanged(value ?? false),
             activeColor: AppColor.primaryColor,
             side: BorderSide(
               color: widget.isAccepted ? Colors.transparent : AppColor.grey6,
@@ -72,7 +87,7 @@ class _CustomTermsAndConditionState extends State<CustomTermsAndCondition> {
                           final result = await Navigator.push<bool>(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => TermsAndConditionsView(),
+                              builder: (_) => TermsAndConditionsView(isAccepted: widget.isAccepted,),
                             ),
                           );
 
@@ -86,7 +101,6 @@ class _CustomTermsAndConditionState extends State<CustomTermsAndCondition> {
                           //   MaterialPageRoute(
                           //     builder:
                           //         (context) => TermsAndConditionsView(
-
                           //         ),
                           //   ),
                           // );

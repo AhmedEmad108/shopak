@@ -319,6 +319,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Start Your Shopping Journey With Shopak"),
         "successfully_created_account": MessageLookupByLibrary.simpleMessage(
             "Successfully created account"),
+        "successfully_signed_in":
+            MessageLookupByLibrary.simpleMessage("Successfully signed in"),
         "terms": MessageLookupByLibrary.simpleMessage(
             "These terms and conditions outline the rules and regulations for the use of our app.\n\nBy accessing this app, we assume you accept these terms and conditions. Do not continue to use the app if you do not agree to all of the terms and conditions stated on this page.\n\n- Usage: The app is intended for personal use only.\n- Privacy: We are committed to protecting your privacy. Your data will be handled according to our privacy policy.\n- Liability: We are not liable for any damages arising from the use of this app.\n- Changes: We reserve the right to modify or update these terms and conditions at any time.\n- Termination: We may terminate this app at any time without notice.\n\nThank you for using our app!"),
         "terms_and_condition1": MessageLookupByLibrary.simpleMessage(

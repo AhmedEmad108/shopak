@@ -582,6 +582,16 @@ class S {
     );
   }
 
+  /// `Successfully signed in`
+  String get successfully_signed_in {
+    return Intl.message(
+      'Successfully signed in',
+      name: 'successfully_signed_in',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign Up`
   String get sign_up {
     return Intl.message(

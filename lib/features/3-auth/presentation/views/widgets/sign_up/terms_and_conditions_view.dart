@@ -4,12 +4,12 @@ import 'package:shopak/core/utils/app_color.dart';
 import 'package:shopak/core/utils/app_style.dart';
 import 'package:shopak/core/widgets/custom_appbar.dart';
 import 'package:shopak/core/widgets/custom_button.dart';
-import 'package:shopak/features/3-auth/presentation/views/sign_up_view.dart';
 import 'package:shopak/generated/l10n.dart';
 
 class TermsAndConditionsView extends StatefulWidget {
-  const TermsAndConditionsView({super.key});
+  const TermsAndConditionsView({super.key, required this.isAccepted});
   static const routeName = '/termsAndConditionsPage';
+  final bool isAccepted;
 
   @override
   State<TermsAndConditionsView> createState() => _TermsAndConditionsViewState();
@@ -40,15 +40,18 @@ class _TermsAndConditionsViewState extends State<TermsAndConditionsView> {
                 style: AppStyle.styleSemiBold22().copyWith(height: 1.5),
               ),
               const SizedBox(height: 33),
-              CustomButton(
-                title: S.of(context).agree_continue,
-                buttonColor: AppColor.primaryColor,
-                textStyle: AppStyle.styleBold24().copyWith(
-                  color: AppColor.white,
+              Visibility(
+                visible: !widget.isAccepted,
+                child: CustomButton(
+                  title: S.of(context).agree_continue,
+                  buttonColor: AppColor.primaryColor,
+                  textStyle: AppStyle.styleBold24().copyWith(
+                    color: AppColor.white,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context, true);
+                  },
                 ),
-                onTap: () {
-                  Navigator.pop(context, true);
-                },
               ),
             ],
           ),

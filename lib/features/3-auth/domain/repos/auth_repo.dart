@@ -16,12 +16,22 @@ abstract class AuthRepo {
     required String password,
   });
 
-
   Future addUserData({required UserEntity user});
-  Future  getUserData({required String uId});
+  Future getUserData({required String uId});
+  Future<Either<Failures, void>> updateUserData({required UserEntity user});
+  Future<Either<Failures, void>> updateUserImage({
+    required String uId,
+    required String image,
+  });
   Future saveUserLocally({required UserEntity user});
+  Future updateUserLocally({required UserEntity user});
   Future deleteUserLocally();
-  
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  });
+
+  Future updateUserEmail({required String newEmail});
 
   Future signOut();
 }

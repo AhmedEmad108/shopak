@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopak/core/cubit/user/user_cubit.dart';
 import 'package:shopak/core/utils/app_color.dart';
 import 'package:shopak/core/utils/app_images.dart';
 import 'package:shopak/core/widgets/custom_dialog.dart';
 import 'package:shopak/core/widgets/loading_dialog.dart';
 import 'package:shopak/core/widgets/show_snackbar.dart';
-import 'package:shopak/features/3-auth/presentation/cubit/signup_cubit/sign_up_cubit.dart';
-import 'package:shopak/features/3-auth/presentation/views/widgets/sign_up/sign_up_view_body.dart';
+import 'package:shopak/features/5-profile/presentation/views/edit_profile/widgets/edit_profile_view_body.dart';
 import 'package:shopak/generated/l10n.dart';
 
-class SignUpViewBlocConsumer extends StatelessWidget {
-  const SignUpViewBlocConsumer({super.key});
+class EditProfileViewBlocConsumer extends StatelessWidget {
+  const EditProfileViewBlocConsumer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignUpCubit, SignUpState>(
+    return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
-        if (state is SignUpLoading) {
+        if (state is EditUserLoading) {
           loadingDialog(context);
         }
-        if (state is SignUpSuccess) {
+        if (state is EditUserSuccess) {
           Navigator.pop(context);
           Navigator.pop(context);
           showSnackBar(
             context,
-            '${S.of(context).successfully_created_account}\n${S.of(context).please_verify_your_email}',
+            S.of(context).profile_edited_successfully,
             AppColor.green,
           );
         }
-        if (state is SignUpError) {
+        if (state is EditUserFailed) {
           Navigator.pop(context);
           customDialog(
             context,
-            title: state.message,
+            title: state.errMessage,
             image: Assets.imagesError,
           );
         }
       },
       builder: (context, state) {
-        return const SignUpViewBody();
+        return EditProfileViewBody();
       },
     );
   }

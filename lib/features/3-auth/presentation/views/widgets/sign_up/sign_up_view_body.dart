@@ -152,14 +152,14 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                       } else {
                         customDialog(
                           context,
-                          message:
+                          title:
                               S.of(context).please_accept_terms_and_conditions,
                         );
                       }
                     } else {
                       customDialog(
                         context,
-                        message:
+                        title:
                             S
                                 .of(context)
                                 .password_and_confirm_password_not_match,

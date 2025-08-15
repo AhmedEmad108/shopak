@@ -96,16 +96,67 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<UserEntity> getUserData({required String uId}) async {
-    var userData = await databaseService.getData(
-      path: BackendEndpoint.userData,
-      documentId: uId,
-    );
-    return UserModel.fromJson(userData);
+  Future getUserData({required String uId}) async {
+    try {
+      var userData = await databaseService.getData(
+        path: BackendEndpoint.userData,
+        documentId: uId,
+      );
+      return UserModel.fromJson(userData);
+    } catch (e) {
+      log('Exception in getUserData: ${e.toString()}');
+      return ServerFailure(message: e.toString());
+    }
+    // var userData = await databaseService.getData(
+    //   path: BackendEndpoint.userData,
+    //   documentId: uId,
+    // );
+    // return UserModel.fromJson(userData);
+  }
+
+  @override
+  Future<Either<Failures, void>> updateUserData({
+    required UserEntity user,
+  }) async {
+    try {
+      await databaseService.updateData(
+        path: BackendEndpoint.userData,
+        data: UserModel.fromEntity(user).toMap(),
+        documentId: user.uId,
+      );
+      return const Right(null);
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failures, void>> updateUserImage({
+    required String uId,
+    required String image,
+  }) async {
+    try {
+      await databaseService.updateData(
+        path: BackendEndpoint.userData,
+        data: {'image': image},
+        documentId: uId,
+      );
+      // await updateUserLocally(user: );
+
+      return const Right(null);
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
   }
 
   @override
   Future saveUserLocally({required UserEntity user}) async {
+    var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
+    await Prefs.setString(kUserData, jsonData);
+  }
+
+  @override
+  Future updateUserLocally({required UserEntity user}) async {
     var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
     await Prefs.setString(kUserData, jsonData);
   }
@@ -119,5 +170,21 @@ class AuthRepoImpl implements AuthRepo {
   Future signOut() async {
     await deleteUserLocally();
     await firebaseAuthService.signOut();
+  }
+
+  @override
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    await firebaseAuthService.changePassword(
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+    );
+  }
+
+  @override
+  Future<void> updateUserEmail({required String newEmail}) async {
+    await firebaseAuthService.updateEmail(newEmail);
   }
 }

@@ -33,7 +33,7 @@ class SignInBlocConsumer extends StatelessWidget {
           Navigator.pop(context);
           customDialog(
             context,
-            message: state.message,
+            title: state.message,
             image: Assets.imagesError,
           );
         }

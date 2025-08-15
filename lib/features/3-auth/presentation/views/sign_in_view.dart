@@ -5,7 +5,6 @@ import 'package:shopak/core/widgets/custom_appbar.dart';
 import 'package:shopak/features/3-auth/domain/repos/auth_repo.dart';
 import 'package:shopak/features/3-auth/presentation/cubit/signin_cubit/sign_in_cubit.dart';
 import 'package:shopak/features/3-auth/presentation/views/widgets/sign_in/sign_in_bloc_consumer.dart';
-import 'package:shopak/features/3-auth/presentation/views/widgets/sign_in/sign_in_view_body.dart';
 import 'package:shopak/generated/l10n.dart';
 
 class SignInView extends StatelessWidget {

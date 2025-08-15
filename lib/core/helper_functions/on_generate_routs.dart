@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:shopak/features/2-on_boaring/presentation/views/on_boarding_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_in_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_up_view.dart';
-import 'package:shopak/features/3-auth/presentation/views/widgets/sign_up/terms_and_conditions_view.dart';
 import 'package:shopak/features/4-main_view/presentation/views/main_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {

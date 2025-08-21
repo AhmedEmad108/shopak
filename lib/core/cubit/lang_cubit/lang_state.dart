@@ -1,6 +1,11 @@
 part of 'lang_cubit.dart';
 
-class LangState {
+@immutable
+abstract class LangState {}
+
+class LangInitial extends LangState {}
+
+class LangChanged extends LangState {
   final String locale;
-  LangState({required this.locale});
+  LangChanged({required this.locale});
 }

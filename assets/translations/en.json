@@ -1,24 +1,5 @@
 {
-  "@@locale": "en",
-    "appTitle": "Online Shop",
-    "@appTitle": {
-        "description": "The title of the application"
-    },
-    "device_language": "Device Language",
-    "english_language": "English Language",
-    "arabic_language": "Arabic Language",
-    "language_changed_to": "Language changed to",
   
-    "english": "English",
-    "arabic": "Arabic",
-
-    "device_mode": "Device Mode",
-    "dark_mode": "Dark Mode",
-    "light_mode": "Light Mode",
-    "device": "Device",
-    "light": "Light",
-    "dark": "Dark",
-    "theme_changed_to": "Theme changed to",
     "hello": "Hello!...",
     "shopak": "Shopak at Your Convenience  🤪",
     "next": "Next",
@@ -108,7 +89,11 @@
     "become_seller": "Become A Seller",
     "logout": "Logout",
 
-   
+    "dark_mode": "Dark Mode",
+    "light_mode": "Light Mode",
+    
+    "english": "English",
+    "arabic": "Arabic",
     
     "save": "Save",
     "cancel": "Cancel",

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopak/features/4-main_view/presentation/views/widgets/custom_bottom_navigation_bar.dart';
+import 'package:shopak/features/5-profile/presentation/views/profile_view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -39,8 +40,7 @@ class _MainViewState extends State<MainView> {
       Container(),
       Container(),
       Container(),
-      Container(),
-      // const ProfieView(),
+      const ProfileView(),
     ][selectedIndex];
   }
 }

@@ -21,7 +21,6 @@ class _CustomProfileHeaderBlocConsumerState
     context.read<UserCubit>().getUserData();
   }
 
-  // UserEntity user = getUser();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
@@ -38,16 +37,10 @@ class _CustomProfileHeaderBlocConsumerState
         if (state is GetUserFailed) {
           return Center(child: Text(state.errMessage));
         }
-        // ret if (state is GetUserSuccess) {
-
-        // }
         return Skeletonizer(
           enabled: true,
           child: ProfileHeaderItem(user: getUser()),
         );
-        // return ProfileHeaderItem(
-        //   user: getUser(),
-        // );
       },
     );
   }

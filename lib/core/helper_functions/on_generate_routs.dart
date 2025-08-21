@@ -4,6 +4,10 @@ import 'package:shopak/features/2-on_boaring/presentation/views/on_boarding_view
 import 'package:shopak/features/3-auth/presentation/views/sign_in_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_up_view.dart';
 import 'package:shopak/features/4-main_view/presentation/views/main_view.dart';
+import 'package:shopak/features/5-profile/presentation/views/become_seller/become_seller_view.dart';
+import 'package:shopak/features/5-profile/presentation/views/chang_password/change_password_view.dart';
+import 'package:shopak/features/5-profile/presentation/views/edit_email/change_email_view.dart';
+import 'package:shopak/features/5-profile/presentation/views/edit_profile/edit_profile_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -77,14 +81,14 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     //       product: args.product,
     //     ),
     //   );
-    // case (EditProfileView.routeName):
-    //   return MaterialPageRoute(builder: (context) => EditProfileView());
-    // case (ChangeEmailView.routeName):
-    //   return MaterialPageRoute(builder: (context) => ChangeEmailView());
-    // case (ChangePasswordView.routeName):
-    //   return MaterialPageRoute(builder: (context) => ChangePasswordView());
-    // case (BecomeSellerView.routeName):
-    //   return MaterialPageRoute(builder: (context) => BecomeSellerView());
+    case (EditProfileView.routeName):
+      return MaterialPageRoute(builder: (context) => EditProfileView());
+    case (ChangeEmailView.routeName):
+      return MaterialPageRoute(builder: (context) => ChangeEmailView());
+    case (ChangePasswordView.routeName):
+      return MaterialPageRoute(builder: (context) => ChangePasswordView());
+    case (BecomeSellerView.routeName):
+      return MaterialPageRoute(builder: (context) => BecomeSellerView());
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
   }

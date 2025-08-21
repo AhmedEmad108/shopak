@@ -9,7 +9,18 @@ class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit() : super(ThemeInitial());
 
   void changeTheme({required String themeMode}) async {
-    await Prefs.setString('themeMode', themeMode);
-    emit(ThemeChangedState(themeMode: themeMode));
+    if (themeMode == 'system') {
+      final Brightness platformBrightness =
+          WidgetsBinding.instance.platformDispatcher.platformBrightness;
+      final String theme =
+          platformBrightness == Brightness.dark ? 'dark' : 'light';
+      emit(ThemeChangedState(themeMode: theme));
+      await Prefs.setString('themeMode', 'system');
+    } else {
+      emit(ThemeChangedState(themeMode: themeMode));
+      await Prefs.setString('themeMode', themeMode);
+    }
+    // await Prefs.setString('themeMode', themeMode);
+    // emit(ThemeChangedState(themeMode: themeMode));
   }
 }

@@ -129,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "ليس لديك حساب؟",
     ),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+    "edit_address": MessageLookupByLibrary.simpleMessage("تعديل العنوان"),
     "edit_category": MessageLookupByLibrary.simpleMessage("تعديل الفئة"),
     "edit_email_message": MessageLookupByLibrary.simpleMessage(
       "هل انت متاكد من تغيير البريد الالكتروني؟",
@@ -252,6 +253,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout_message": MessageLookupByLibrary.simpleMessage(
       "هل تريد تسجيل الخروج؟",
     ),
+    "make_primary_address": MessageLookupByLibrary.simpleMessage(
+      "جعل العنوان الرئيسي",
+    ),
     "manage_sellers": MessageLookupByLibrary.simpleMessage("ادارة البائعين"),
     "manage_users": MessageLookupByLibrary.simpleMessage("ادارة المستخدمين"),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
@@ -268,6 +272,7 @@ class MessageLookup extends MessageLookupByLibrary {
           "كلمة المرور الجديدة وتاكيد كلمة المرور غير متطابقان",
         ),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "no_address": MessageLookupByLibrary.simpleMessage("لا يوجد عنوان"),
     "no_categories_found": MessageLookupByLibrary.simpleMessage("لا يوجد فئات"),
     "no_data": MessageLookupByLibrary.simpleMessage("لا يوجد بيانات"),
     "no_products_found": MessageLookupByLibrary.simpleMessage("لا يوجد منتجات"),
@@ -386,6 +391,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "select_country": MessageLookupByLibrary.simpleMessage("اختر دولتك"),
     "select_country_first": MessageLookupByLibrary.simpleMessage(
       "يرجى اختيار دولتك اولا",
+    ),
+    "select_primary_address": MessageLookupByLibrary.simpleMessage(
+      "تحديد العنوان الرئيسي",
     ),
     "sellers_requests": MessageLookupByLibrary.simpleMessage("طلبات البائعين"),
     "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),

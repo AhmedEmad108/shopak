@@ -125,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Don’t have an account?",
     ),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+    "edit_address": MessageLookupByLibrary.simpleMessage("Edit Address"),
     "edit_category": MessageLookupByLibrary.simpleMessage("Edit Category"),
     "edit_email_message": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to change your email?",
@@ -244,6 +245,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout_message": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to logout?",
     ),
+    "make_primary_address": MessageLookupByLibrary.simpleMessage(
+      "Make Primary Address",
+    ),
     "manage_sellers": MessageLookupByLibrary.simpleMessage("Manage Sellers"),
     "manage_users": MessageLookupByLibrary.simpleMessage("Manage Users"),
     "name": MessageLookupByLibrary.simpleMessage("User Name"),
@@ -260,6 +264,7 @@ class MessageLookup extends MessageLookupByLibrary {
           "New password and confirm password does not match",
         ),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "no_address": MessageLookupByLibrary.simpleMessage("No Address"),
     "no_categories_found": MessageLookupByLibrary.simpleMessage(
       "No Categories Found",
     ),
@@ -382,6 +387,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "select_country_first": MessageLookupByLibrary.simpleMessage(
       "Please Select Your Country First",
+    ),
+    "select_primary_address": MessageLookupByLibrary.simpleMessage(
+      "Select Primary Address",
     ),
     "sellers_requests": MessageLookupByLibrary.simpleMessage(
       "Sellers Requests",

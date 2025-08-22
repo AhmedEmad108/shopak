@@ -22,12 +22,6 @@ void customSnackBar(BuildContext context, {required String message}) {
                 color: AppColor.white,
                 fontWeight: FontWeight.bold,
               ),
-
-              // const TextStyle(
-              //   fontWeight: FontWeight.bold,
-              //   color: Colors.white,
-              //   fontSize: 16,
-              // ),
             ),
           ),
         ],

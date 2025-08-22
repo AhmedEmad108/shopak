@@ -45,39 +45,3 @@ class ChangeEmailViewBlocConsumer extends StatelessWidget {
     );
   }
 }
-
-// class ChangeEmailViewBlocConsumer extends StatelessWidget {
-//   const ChangeEmailViewBlocConsumer({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocConsumer<UserCubit, UserState>(
-//       listener: (context, state) {
-//         if (state is ChangeEmailLoading) {
-//           Navigator.pop(context);
-//           loadingDialog(context);
-//         }
-//         if (state is ChangeEmailSuccess) {
-//           Navigator.pop(context);
-//           FirebaseAuth.instance.signOut().then((value) {
-//             Navigator.of(
-//               context,
-//             ).pushNamedAndRemoveUntil(SignInView.routeName, (route) => false);
-//           });
-//           showSnackBar(
-//             context,
-//             'please_verify_your_email,
-//             AppColor.green,
-//           );
-//         }
-//         if (state is ChangeEmailFailed) {
-//           Navigator.pop(context);
-//           customDialog(context, title: state.error, image: Assets.imagesError);
-//         }
-//       },
-//       builder: (context, state) {
-//         return ChangeEmailViewBody();
-//       },
-//     );
-//   }
-// }

@@ -66,7 +66,6 @@ class _SplashViewBodyState extends State<SplashViewBody> {
           (route) => false,
         );
       }
-      // var emailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
     });
   }
 }

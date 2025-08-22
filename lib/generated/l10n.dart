@@ -1831,6 +1831,41 @@ class S {
     );
   }
 
+  /// `No Address`
+  String get no_address {
+    return Intl.message('No Address', name: 'no_address', desc: '', args: []);
+  }
+
+  /// `Edit Address`
+  String get edit_address {
+    return Intl.message(
+      'Edit Address',
+      name: 'edit_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Primary Address`
+  String get select_primary_address {
+    return Intl.message(
+      'Select Primary Address',
+      name: 'select_primary_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make Primary Address`
+  String get make_primary_address {
+    return Intl.message(
+      'Make Primary Address',
+      name: 'make_primary_address',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name Vendor in English`
   String get name_vendor_en {
     return Intl.message(

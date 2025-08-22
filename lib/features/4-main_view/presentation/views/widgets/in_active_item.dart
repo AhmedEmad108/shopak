@@ -44,13 +44,5 @@ class InActiveItem extends StatelessWidget {
         ),
       ),
     );
-    // return Center(
-    //   child: SvgPicture.asset(
-    //     image,
-    //     width: 32,
-    //     height: 32,
-    //     color: Theme.of(context).colorScheme.secondary,
-    //   ),
-    // );
   }
 }

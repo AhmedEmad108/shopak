@@ -47,19 +47,6 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             currentPage: currentPage,
           ),
         ),
-        // DotsIndicator(
-        //   dotsCount: onBoardingList.length,
-        //   position: currentPage.toDouble(),
-        //   decorator: DotsDecorator(
-        //     color:
-        //         currentPage != 0 && currentPage == onBoardingList.length - 1
-        //             ? AppColor.primaryColor
-        //             : AppColor.primaryColor.withOpacity(0.5),
-        //     activeColor: AppColor.primaryColor,
-        //     size: const Size(13, 13),
-        //     activeSize: const Size(15, 15),
-        //   ),
-        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(onBoardingList.length, (index) {

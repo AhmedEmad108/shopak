@@ -5,7 +5,6 @@ import 'package:shopak/core/cubit/user/user_cubit.dart';
 import 'package:shopak/core/helper_functions/get_user.dart';
 import 'package:shopak/core/helper_functions/valid_input.dart';
 import 'package:shopak/core/services/shared_prefrences_singletone.dart';
-import 'package:shopak/core/utils/app_color.dart';
 import 'package:shopak/core/widgets/custom_floating_button.dart';
 import 'package:shopak/core/widgets/custom_image_picker.dart';
 import 'package:shopak/core/widgets/custom_text_field.dart';
@@ -25,7 +24,6 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   TextEditingController userName = TextEditingController();
   TextEditingController phone = TextEditingController();
-  // TextEditingController address = TextEditingController();
   String? urlImage;
   List<TextEditingController> addressControllers = [];
   int? primaryIndex;
@@ -35,7 +33,6 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
     userName.text = user2.name;
     phone.text = user2.phone;
     urlImage = user2.image;
-    // address.text = user2.address?[0] ?? '';
     if (user2.address != null) {
       for (var addr in user2.address!) {
         addressControllers.add(TextEditingController(text: addr));
@@ -51,7 +48,6 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   void dispose() {
     userName.dispose();
     phone.dispose();
-    // address.dispose();
     for (var controller in addressControllers) {
       controller.dispose();
     }
@@ -73,9 +69,118 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
     });
   }
 
+  void showAddressBottomSheet(BuildContext context) {
+    final lang = Prefs.getString('lang') ?? 'system';
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 16,
+            right: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+            top: 16,
+          ),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: StatefulBuilder(
+              builder: (context, setSheetState) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      S.of(context).address,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 16),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: addressControllers.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: CustomTextField(
+                                hintText: S.of(context).enter_address,
+                                labels: "${S.of(context).address} ${index + 1}",
+                                controller: addressControllers[index],
+                                validator:
+                                    (value) => validInput(
+                                      context: context,
+                                      val: value!,
+                                      type: 'name',
+                                      max: 50,
+                                      min: 3,
+                                    ),
+                                keyboardType: TextInputType.streetAddress,
+                                suffixIcon: const Icon(
+                                  Icons.location_on_outlined,
+                                ),
+                              ),
+                            ),
+                            Tooltip(
+                              message: S.of(context).select_primary_address,
+                              child: Radio<int>(
+                                value: index,
+                                groupValue: primaryIndex,
+                                onChanged: (value) {
+                                  setSheetState(() {
+                                    primaryIndex = value!;
+                                  });
+                                  setState(() {
+                                    primaryIndex = value!;
+                                  });
+                                },
+                                activeColor: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                            IconButton(
+                              tooltip: S.of(context).remove_address,
+                              onPressed: () {
+                                setSheetState(() => removeAddress(index));
+                              },
+                              icon: const Icon(
+                                Icons.delete_outlined,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      separatorBuilder:
+                          (context, index) => const SizedBox(height: 16),
+                    ),
+                    // const SizedBox(height: 16),
+                    Align(
+                      alignment:
+                          lang == 'ar'
+                              ? Alignment.centerLeft
+                              : Alignment.centerRight,
+                      child: TextButton.icon(
+                        onPressed: () {
+                          setSheetState(() => addAddress());
+                        },
+                        icon: const Icon(Icons.add_location_alt_outlined),
+                        label: Text(S.of(context).add_address),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final lang = Prefs.getString('lang') ?? 'system';
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -135,90 +240,37 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                   suffixIcon: const Icon(Icons.phone_android_outlined),
                 ),
                 const SizedBox(height: 16),
-
-                // CustomTextField(
-                //   hintText: S.of(context).enter_address,
-                //   labels: S.of(context).address,
-                //   controller: address,
-                //   onSaved: (value) {
-                //     address.text = value!;
-                //   },
-                //   validator: (value) {
-                //     return validInput(
-                //       context: context,
-                //       val: value!,
-                //       type: 'name',
-                //       max: 20,
-                //       min: 3,
-                //     );
-                //   },
-                //   keyboardType: TextInputType.streetAddress,
-                //   suffixIcon: const Icon(Icons.location_on_outlined),
-                // ),
-
-                // 🏠 عناوين متعددة
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: addressControllers.length,
-                  itemBuilder: (context, index) {
-                    return Row(
-                      children: [
-                        Expanded(
-                          child: CustomTextField(
-                            hintText: S.of(context).enter_address,
-                            labels: "${S.of(context).address} ${index + 1}",
-                            controller: addressControllers[index],
-                            validator:
-                                (value) => validInput(
-                                  context: context,
-                                  val: value!,
-                                  type: 'name',
-                                  max: 50,
-                                  min: 3,
-                                ),
-                            keyboardType: TextInputType.streetAddress,
-                            suffixIcon: const Icon(Icons.location_on_outlined),
-                          ),
-                        ),
-                        Radio<int>(
-                          value: index,
-                          groupValue: primaryIndex,
-                          onChanged: (value) {
-                            setState(() {
-                              primaryIndex = value!;
-                            });
-                          },
-                          activeColor: Theme.of(context).primaryColor,
-                        ),
-                        IconButton(
-                          tooltip: S.of(context).remove_address,
-                          onPressed: () => removeAddress(index),
-                          icon: const Icon(
-                            Icons.delete_outlined,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                  separatorBuilder:
-                      (context, index) => const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        hintText: S.of(context).enter_address,
+                        labels: S.of(context).address,
+                        controller:
+                            primaryIndex != null &&
+                                    primaryIndex! < addressControllers.length
+                                ? addressControllers[primaryIndex!]
+                                : TextEditingController(),
+                        validator:
+                            (value) => validInput(
+                              context: context,
+                              val: value!,
+                              type: 'name',
+                              max: 50,
+                              min: 3,
+                            ),
+                        keyboardType: TextInputType.streetAddress,
+                        suffixIcon: const Icon(Icons.location_on_outlined),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () => showAddressBottomSheet(context),
+                      icon: const Icon(Icons.edit_location_alt_outlined),
+                      tooltip: S.of(context).edit_address,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 16),
 
-                // زرار إضافة عنوان جديد
-                Align(
-                  alignment:
-                      lang == 'ar'
-                          ? Alignment.centerLeft
-                          : Alignment.centerRight,
-                  child: TextButton.icon(
-                    onPressed: addAddress,
-                    icon: const Icon(Icons.add_location_alt_outlined),
-                    label: Text(S.of(context).add_address),
-                  ),
-                ),
                 const SizedBox(height: 16),
               ],
             ),

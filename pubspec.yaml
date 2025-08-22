@@ -54,6 +54,10 @@ dependencies:
   svg_flutter: ^0.0.1
   # easy_localization: ^3.0.8
   intl_utils: ^2.8.11
+  google_maps_flutter: ^2.12.3
+  location: ^8.0.1
+  geocoding: ^4.0.0
+
 
 
 

@@ -18,24 +18,16 @@ import 'package:shopak/generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = CustomBlocObserver();
-  // await EasyLocalization.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Prefs.init();
 
   String? lang = Prefs.getString('lang');
   if (lang == null || lang.isEmpty) {
-    // Locale deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
-    // String deviceLang = deviceLocale.languageCode;
     Prefs.setString('lang', 'system');
   }
-
   String? theme = Prefs.getString('themeMode');
   if (theme == null || theme.isEmpty) {
-    // Brightness platformBrightness =
-    //     WidgetsBinding.instance.platformDispatcher.platformBrightness;
-    // String deviceTheme =
-    //     platformBrightness == Brightness.dark ? 'dark' : 'light';
     Prefs.setString('themeMode', 'system');
   }
   setupGetIt();

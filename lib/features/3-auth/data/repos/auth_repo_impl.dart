@@ -39,14 +39,6 @@ class AuthRepoImpl implements AuthRepo {
       var userModel = UserModel.fromFirebaseUser(
         user,
       ).copyWith(name: name, phone: phone, image: image);
-      // var userEntity = UserEntity(
-      //   uId: user.uid,
-      //   email: email,
-      //   name: name,
-      //   phone: phone,
-      //   image: image,
-
-      // );
       await user.sendEmailVerification();
       await addUserData(user: userModel);
       return right(userModel);
@@ -111,8 +103,6 @@ class AuthRepoImpl implements AuthRepo {
           );
         }
       });
-      // await saveUserLocally(user: userEntity);
-      // return right(userEntity);
     } on CustomException catch (e) {
       return left(ServerFailure(message: e.message));
     } catch (e) {
@@ -152,11 +142,6 @@ class AuthRepoImpl implements AuthRepo {
       log('Exception in getUserData: ${e.toString()}');
       return Left(ServerFailure(message: e.toString()));
     }
-    // var userData = await databaseService.getData(
-    //   path: BackendEndpoint.userData,
-    //   documentId: uId,
-    // );
-    // return UserModel.fromJson(userData);
   }
 
   @override
@@ -206,8 +191,6 @@ class AuthRepoImpl implements AuthRepo {
       log('Exception in saveUserLocally: ${e.toString()}');
       return Left(ServerFailure(message: e.toString()));
     }
-    // var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
-    // await Prefs.setString(kUserData, jsonData);
   }
 
   @override

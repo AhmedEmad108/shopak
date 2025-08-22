@@ -22,8 +22,5 @@ AppBar customAppBar(BuildContext context,
     elevation: 0,
     actions: [trailing ?? const SizedBox()],
     bottom: bottom,
-    // backgroundColor: AppColor.transparent,
-    // iconTheme: const IconThemeData(color: AppColor.black),
-    // foregroundColor: AppColor.black,
   );
 }

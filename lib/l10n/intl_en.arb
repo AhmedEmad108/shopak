@@ -249,6 +249,10 @@
   "admin_panel": "Admin Panel",
   "add_address": "Add Address",
   "remove_address": "Remove Address",
+  "no_address": "No Address",
+  "edit_address": "Edit Address",
+  "select_primary_address": "Select Primary Address",
+  "make_primary_address": "Make Primary Address",
 
 
   "name_vendor_en": "Name Vendor in English",

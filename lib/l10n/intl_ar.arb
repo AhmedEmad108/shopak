@@ -238,6 +238,10 @@
   "admin_panel": "لوحة التحكم",
   "add_address": "اضافة عنوان",
   "remove_address": "حذف عنوان",
+  "no_address": "لا يوجد عنوان",
+  "edit_address": "تعديل العنوان",
+  "select_primary_address": "تحديد العنوان الرئيسي",
+  "make_primary_address": "جعل العنوان الرئيسي",
 
 
   "name_vendor_en": "اسم البائع بالانجليزي",

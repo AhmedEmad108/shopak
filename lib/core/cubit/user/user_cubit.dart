@@ -2,23 +2,15 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
-import 'package:shopak/core/helper_functions/get_user.dart';
 import 'package:shopak/core/utils/backend_endpoint.dart';
 import 'package:shopak/features/3-auth/domain/entities/user_entity.dart';
 import 'package:shopak/features/3-auth/domain/repos/auth_repo.dart';
-// import 'package:shopak/core/helper_functions/get_user.dart';
-// import 'package:shopak/features/3-auth/domain/entities/user_entity.dart';
-// import 'package:shopak/features/3-auth/domain/repos/auth_repo.dart';
-
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   final AuthRepo authRepo;
 
-  UserCubit(this.authRepo) : super(UserInitial()) {
-    // getUserData();
-  }
-  // UserEntity user = getUser();
+  UserCubit(this.authRepo) : super(UserInitial());
 
   final firebaseAuth = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance;
@@ -63,28 +55,6 @@ class UserCubit extends Cubit<UserState> {
       emit(GetUserSuccess(user: r));
       await authRepo.saveUserLocally(user: r);
     });
-    // try {
-    //   final reselt = await authRepo.getUserData(uId: getCurrentUserId());
-    //   emit(GetUserSuccess(user: reselt));
-    //   await authRepo.saveUserLocally(
-    //     user: UserEntity(
-    //       uId: reselt.uId,
-    //       email: reselt.email,
-    //       name: reselt.name,
-    //       phone: reselt.phone,
-    //       image: reselt.image,
-    //       address: reselt.address,
-    //       isActive: reselt.isActive,
-    //       isEmailVerified: reselt.isEmailVerified,
-    //       role: reselt.role,
-    //       createdAt: reselt.createdAt,
-    //       updatedAt: reselt.updatedAt,
-    //       lastLogin: reselt.lastLogin,
-    //     ),
-    //   );
-    // } catch (e) {
-    //   emit(GetUserFailed(errMessage: e.toString()));
-    // }
   }
 
   Future<void> signOut() async {
@@ -111,54 +81,7 @@ class UserCubit extends Cubit<UserState> {
     } catch (e) {
       emit(EditUserFailed(errMessage: e.toString()));
     }
-    // result.fold(
-    //   (l) => emit(EditUserFailed(
-    //     errMessage: l.message,
-    //   )),
-    //   (r) => emit(
-    //     EditUserSuccess(
-    //       user: user,
-    //     ),
-    //     await getUserData(),
-    //   ),
-    // );
   }
-
-  Future<void> updateEmail({required String newEmail}) async {
-    emit(ChangeEmailLoading());
-    try {
-      // ✉️ بعت لينك Verify على الإيميل الجديد
-      await FirebaseAuth.instance.currentUser!.verifyBeforeUpdateEmail(
-        newEmail,
-      );
-
-      // 👂 نسمع على تغييرات المستخدم
-      FirebaseAuth.instance.userChanges().listen((user) async {
-        if (user != null && user.email == newEmail && user.emailVerified) {
-          // ✅ المستخدم اتحقق والإيميل اتغير في Firebase Auth
-
-          UserEntity currentUser = getUser();
-
-          UserEntity updatedUser = currentUser.copyWith(
-            email: newEmail,
-            isEmailVerified: true,
-            updatedAt: DateTime.now(),
-          );
-
-          // 🔥 تحديث Firestore
-          await authRepo.updateUserData(user: updatedUser);
-
-          // 💾 تحديث التخزين المحلي
-          await authRepo.updateUserLocally(user: updatedUser);
-
-          emit(ChangeEmailSuccess());
-        }
-      });
-    } catch (e) {
-      emit(ChangeEmailFailed(error: e.toString()));
-    }
-  }
-
   String getCurrentUserId() {
     return FirebaseAuth.instance.currentUser!.uid;
   }

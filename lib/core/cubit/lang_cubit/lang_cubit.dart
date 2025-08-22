@@ -15,10 +15,5 @@ class LangCubit extends Cubit<LangState> {
       emit(LangChanged(locale: lang));
       await Prefs.setString('lang', lang);
     }
-    // await Prefs.setString('lang', lang);
-    // emit(LangState(
-    //   locale: lang,
-    // ),
-    // );
   }
 }

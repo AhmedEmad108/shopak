@@ -19,7 +19,5 @@ class ThemeCubit extends Cubit<ThemeState> {
       emit(ThemeChangedState(themeMode: themeMode));
       await Prefs.setString('themeMode', themeMode);
     }
-    // await Prefs.setString('themeMode', themeMode);
-    // emit(ThemeChangedState(themeMode: themeMode));
   }
 }

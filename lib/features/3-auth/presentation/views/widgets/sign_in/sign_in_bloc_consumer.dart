@@ -22,7 +22,11 @@ class SignInBlocConsumer extends StatelessWidget {
         }
         if (state is SignInSuccess) {
           Navigator.pop(context);
-          Navigator.pushNamed(context, MainView.routeName);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            MainView.routeName,
+            (route) => false,
+          );
           showSnackBar(
             context,
             S.of(context).successfully_signed_in,

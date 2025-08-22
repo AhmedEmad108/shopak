@@ -19,9 +19,9 @@ class NavigationBarItem extends StatelessWidget {
       children: [
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 200),
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return ScaleTransition(scale: animation, child: child);
-          },
+          // transitionBuilder: (Widget child, Animation<double> animation) {
+          //   return ScaleTransition(scale: animation, child: child);
+          // },
           // switchInCurve: Curves.linearToEaseOut,
           // switchOutCurve: Curves.fastOutSlowIn,
           child:
@@ -31,6 +31,7 @@ class NavigationBarItem extends StatelessWidget {
                     image: bottomNavigationBarEntity.activeImage,
                   )
                   : InActiveItem(
+                    text: bottomNavigationBarEntity.name,
                     image: bottomNavigationBarEntity.inActiveImage,
                   ),
         ),

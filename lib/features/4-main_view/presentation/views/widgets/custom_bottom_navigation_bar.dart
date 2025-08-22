@@ -5,8 +5,13 @@ import 'package:shopak/features/4-main_view/presentation/views/widgets/navigatio
 import 'package:shopak/generated/l10n.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({super.key, required this.itemIndex});
+  const CustomBottomNavigationBar({
+    super.key,
+    required this.itemIndex,
+    required this.userRole,
+  });
   final ValueChanged<int> itemIndex;
+  final String userRole;
 
   @override
   State<CustomBottomNavigationBar> createState() =>
@@ -15,6 +20,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     List<BottomNavigationBarEntity> bottomNavigationBarEntities = [
@@ -33,6 +39,12 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         activeImage: Assets.imagesShoppingCartActive,
         inActiveImage: Assets.imagesShoppingCart,
       ),
+      if (widget.userRole == 'admin')
+        BottomNavigationBarEntity(
+          name: S.of(context).admin_panel,
+          activeImage: Assets.imagesAdminActive,
+          inActiveImage: Assets.imagesAdmin,
+        ),
       BottomNavigationBarEntity(
         name: S.of(context).profile,
         activeImage: Assets.imagesProfileActive,
@@ -41,9 +53,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     ];
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.linearToEaseOut,
-      height: 90,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeIn,
+      height: 80,
       padding: const EdgeInsets.only(left: 16, right: 16),
       decoration: ShapeDecoration(
         color: Theme.of(context).colorScheme.onSecondary,
@@ -63,6 +75,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         ],
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:
             bottomNavigationBarEntities.asMap().entries.map((e) {
               var index = e.key;

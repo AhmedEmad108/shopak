@@ -21,6 +21,7 @@ class ActiveItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const SizedBox(height: 4),
             Container(
               width: 40,
               height: 40,

@@ -129,6 +129,7 @@
     "reset_password": "اعادة تعيين كلمة المرور",
     "create_new_password": "انشاء كلمة مرور جديدة",
     "your_new_password": "كلمة المرور الجديدة يجب ان تختلف عن كلمة المرور السابقة.",
+    "your_new_email": "بريدك الالكتروني الجديد يجب ان يختلف عن البريد الالكتروني السابق.",
 
 
     "congratulations": "تهانينا!",
@@ -231,6 +232,12 @@
   "new_password_and_confirm_password_does_not_match": "كلمة المرور الجديدة وتاكيد كلمة المرور غير متطابقان",
   "password_updated_successfully": "تم تحديث كلمة المرور بنجاح",
   "logout_message": "هل تريد تسجيل الخروج؟",
+  "sellers_requests": "طلبات البائعين",
+  "manage_sellers": "ادارة البائعين",
+  "manage_users": "ادارة المستخدمين",
+  "admin_panel": "لوحة التحكم",
+  "add_address": "اضافة عنوان",
+  "remove_address": "حذف عنوان",
 
 
   "name_vendor_en": "اسم البائع بالانجليزي",

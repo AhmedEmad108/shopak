@@ -134,6 +134,7 @@
     "reset_password": "Reset Password",
     "create_new_password": "Create New Password",
     "your_new_password": "Your new password must be different from previous used passwords.",
+    "your_new_email": "Your new email address must be different from previous used email.",
 
     "congratulations": "Congratulations!",
     "your_password_has_been_changed": "Your Password Has Been Changed Successfully",
@@ -242,6 +243,12 @@
 
   "password_updated_successfully": "Password updated successfully",
   "logout_message": "Are you sure you want to logout?",
+  "sellers_requests": "Sellers Requests",
+  "manage_sellers": "Manage Sellers",
+  "manage_users": "Manage Users",
+  "admin_panel": "Admin Panel",
+  "add_address": "Add Address",
+  "remove_address": "Remove Address",
 
 
   "name_vendor_en": "Name Vendor in English",

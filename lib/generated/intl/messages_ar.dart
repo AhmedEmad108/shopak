@@ -26,9 +26,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "active_categories": MessageLookupByLibrary.simpleMessage("الفئات النشطة"),
     "active_products": MessageLookupByLibrary.simpleMessage("المنتجات النشطة"),
     "add": MessageLookupByLibrary.simpleMessage("اضافة"),
+    "add_address": MessageLookupByLibrary.simpleMessage("اضافة عنوان"),
     "add_category": MessageLookupByLibrary.simpleMessage("اضافة فئة"),
     "add_product": MessageLookupByLibrary.simpleMessage("اضافة منتج"),
     "address": MessageLookupByLibrary.simpleMessage("العنوان"),
+    "admin_panel": MessageLookupByLibrary.simpleMessage("لوحة التحكم"),
     "agree_continue": MessageLookupByLibrary.simpleMessage("موافق ومتابعة"),
     "all_categories": MessageLookupByLibrary.simpleMessage("كل الفئات"),
     "all_products": MessageLookupByLibrary.simpleMessage("كل المنتجات"),
@@ -250,6 +252,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout_message": MessageLookupByLibrary.simpleMessage(
       "هل تريد تسجيل الخروج؟",
     ),
+    "manage_sellers": MessageLookupByLibrary.simpleMessage("ادارة البائعين"),
+    "manage_users": MessageLookupByLibrary.simpleMessage("ادارة المستخدمين"),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "name_vendor_ar": MessageLookupByLibrary.simpleMessage(
       "اسم البائع بالعربي",
@@ -362,6 +366,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "اسحب لأسفل للتحديث",
     ),
     "refresh": MessageLookupByLibrary.simpleMessage("تحديث"),
+    "remove_address": MessageLookupByLibrary.simpleMessage("حذف عنوان"),
     "resend_code": MessageLookupByLibrary.simpleMessage("ارسال مرة اخرى"),
     "reset_password": MessageLookupByLibrary.simpleMessage(
       "اعادة تعيين كلمة المرور",
@@ -382,6 +387,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "select_country_first": MessageLookupByLibrary.simpleMessage(
       "يرجى اختيار دولتك اولا",
     ),
+    "sellers_requests": MessageLookupByLibrary.simpleMessage("طلبات البائعين"),
     "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
     "shop_now": MessageLookupByLibrary.simpleMessage("تسوق الان"),
     "shopak": MessageLookupByLibrary.simpleMessage("شوبك علي كيفك  🤪"),
@@ -440,6 +446,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "with_shopak": MessageLookupByLibrary.simpleMessage(
       "مع شوبك، التسوق بقا أسهل وأسرع.",
+    ),
+    "your_new_email": MessageLookupByLibrary.simpleMessage(
+      "بريدك الالكتروني الجديد يجب ان يختلف عن البريد الالكتروني السابق.",
     ),
     "your_new_password": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الجديدة يجب ان تختلف عن كلمة المرور السابقة.",

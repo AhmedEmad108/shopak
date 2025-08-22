@@ -28,9 +28,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "active_products": MessageLookupByLibrary.simpleMessage("Active Products"),
     "add": MessageLookupByLibrary.simpleMessage("Add"),
+    "add_address": MessageLookupByLibrary.simpleMessage("Add Address"),
     "add_category": MessageLookupByLibrary.simpleMessage("Add Categery"),
     "add_product": MessageLookupByLibrary.simpleMessage("Add Product"),
     "address": MessageLookupByLibrary.simpleMessage("Address"),
+    "admin_panel": MessageLookupByLibrary.simpleMessage("Admin Panel"),
     "agree_continue": MessageLookupByLibrary.simpleMessage("Agree & Continue"),
     "all_categories": MessageLookupByLibrary.simpleMessage("All Categories"),
     "all_products": MessageLookupByLibrary.simpleMessage("All Products"),
@@ -242,6 +244,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout_message": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to logout?",
     ),
+    "manage_sellers": MessageLookupByLibrary.simpleMessage("Manage Sellers"),
+    "manage_users": MessageLookupByLibrary.simpleMessage("Manage Users"),
     "name": MessageLookupByLibrary.simpleMessage("User Name"),
     "name_vendor_ar": MessageLookupByLibrary.simpleMessage(
       "Name Vendor in Arabic",
@@ -356,6 +360,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Pull down to refresh",
     ),
     "refresh": MessageLookupByLibrary.simpleMessage("Refresh"),
+    "remove_address": MessageLookupByLibrary.simpleMessage("Remove Address"),
     "resend_code": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "reset_password": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
@@ -377,6 +382,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "select_country_first": MessageLookupByLibrary.simpleMessage(
       "Please Select Your Country First",
+    ),
+    "sellers_requests": MessageLookupByLibrary.simpleMessage(
+      "Sellers Requests",
     ),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "shop_now": MessageLookupByLibrary.simpleMessage("Shop Now"),
@@ -440,6 +448,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "with_shopak": MessageLookupByLibrary.simpleMessage(
       "With Shopak, Shopping Is Easier Than Ever.",
+    ),
+    "your_new_email": MessageLookupByLibrary.simpleMessage(
+      "Your new email address must be different from previous used email.",
     ),
     "your_new_password": MessageLookupByLibrary.simpleMessage(
       "Your new password must be different from previous used passwords.",

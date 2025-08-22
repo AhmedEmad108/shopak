@@ -18,7 +18,9 @@ class _CustomProfileHeaderBlocConsumerState
   @override
   void initState() {
     super.initState();
-    context.read<UserCubit>().getUserData();
+    context.read<UserCubit>().listenToUserData();
+
+    // context.read<UserCubit>().getUserData();
   }
 
   @override

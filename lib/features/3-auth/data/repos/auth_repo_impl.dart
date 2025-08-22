@@ -35,16 +35,21 @@ class AuthRepoImpl implements AuthRepo {
         email: email,
         password: password,
       );
-      var userEntity = UserEntity(
-        uId: user.uid,
-        email: email,
-        name: name,
-        phone: phone,
-        image: image,
-      );
+
+      var userModel = UserModel.fromFirebaseUser(
+        user,
+      ).copyWith(name: name, phone: phone, image: image);
+      // var userEntity = UserEntity(
+      //   uId: user.uid,
+      //   email: email,
+      //   name: name,
+      //   phone: phone,
+      //   image: image,
+
+      // );
       await user.sendEmailVerification();
-      await addUserData(user: userEntity);
-      return right(userEntity);
+      await addUserData(user: userModel);
+      return right(userModel);
     } on CustomException catch (e) {
       await deleteUser(user);
       return left(ServerFailure(message: e.message));
@@ -73,9 +78,41 @@ class AuthRepoImpl implements AuthRepo {
         email: email,
         password: password,
       );
-      var userEntity = await getUserData(uId: user.uid);
-      await saveUserLocally(user: userEntity);
-      return right(userEntity);
+      await user.reload();
+      user = FirebaseAuth.instance.currentUser!;
+      var result = await getUserData(uId: user.uid);
+
+      return result.fold((failure) => left(failure), (userEntity) async {
+        if (user.emailVerified) {
+          if (userEntity.isActive) {
+            userEntity = userEntity.copyWith(
+              lastLogin: DateTime.now(),
+              email: email,
+              isEmailVerified: true,
+            );
+            await updateUserData(user: userEntity);
+            await updateUserLocally(user: userEntity);
+            return right(userEntity);
+          } else {
+            return left(
+              ServerFailure(
+                message: 'Your account is deactivated. Please contact support.',
+              ),
+            );
+          }
+        } else {
+          await user.sendEmailVerification();
+          log('Email not verified');
+          return left(
+            ServerFailure(
+              message:
+                  'Email not verified. A verification link has been sent to your email.',
+            ),
+          );
+        }
+      });
+      // await saveUserLocally(user: userEntity);
+      // return right(userEntity);
     } on CustomException catch (e) {
       return left(ServerFailure(message: e.message));
     } catch (e) {
@@ -87,25 +124,33 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future addUserData({required UserEntity user}) async {
-    await databaseService.addData(
-      path: BackendEndpoint.userData,
-      data: UserModel.fromEntity(user).toMap(),
-      documentId: user.uId,
-    );
+  Future<Either<Failures, Unit>> addUserData({required UserEntity user}) async {
+    try {
+      await databaseService.addData(
+        path: BackendEndpoint.userData,
+        data: UserModel.fromEntity(user).toMap(),
+        documentId: user.uId,
+      );
+
+      return const Right(unit);
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
   }
 
   @override
-  Future getUserData({required String uId}) async {
+  Future<Either<Failures, UserEntity>> getUserData({
+    required String uId,
+  }) async {
     try {
       var userData = await databaseService.getData(
         path: BackendEndpoint.userData,
         documentId: uId,
       );
-      return UserModel.fromJson(userData);
+      return Right(UserModel.fromJson(userData));
     } catch (e) {
       log('Exception in getUserData: ${e.toString()}');
-      return ServerFailure(message: e.toString());
+      return Left(ServerFailure(message: e.toString()));
     }
     // var userData = await databaseService.getData(
     //   path: BackendEndpoint.userData,
@@ -115,7 +160,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failures, void>> updateUserData({
+  Future<Either<Failures, Unit>> updateUserData({
     required UserEntity user,
   }) async {
     try {
@@ -124,52 +169,82 @@ class AuthRepoImpl implements AuthRepo {
         data: UserModel.fromEntity(user).toMap(),
         documentId: user.uId,
       );
-      return const Right(null);
+      return const Right(unit);
     } catch (e) {
       return Left(ServerFailure(message: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failures, void>> updateUserImage({
+  Future<Either<Failures, Unit>> updateUserImage({
     required String uId,
     required String image,
   }) async {
     try {
       await databaseService.updateData(
         path: BackendEndpoint.userData,
-        data: {'image': image},
+        data: {'image': image, 'updatedAt': DateTime.now()},
         documentId: uId,
       );
       // await updateUserLocally(user: );
 
-      return const Right(null);
+      return const Right(unit);
     } catch (e) {
       return Left(ServerFailure(message: e.toString()));
     }
   }
 
   @override
-  Future saveUserLocally({required UserEntity user}) async {
-    var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
-    await Prefs.setString(kUserData, jsonData);
+  Future<Either<Failures, Unit>> saveUserLocally({
+    required UserEntity user,
+  }) async {
+    try {
+      var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
+      await Prefs.setString(kUserData, jsonData);
+      return const Right(unit);
+    } catch (e) {
+      log('Exception in saveUserLocally: ${e.toString()}');
+      return Left(ServerFailure(message: e.toString()));
+    }
+    // var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
+    // await Prefs.setString(kUserData, jsonData);
   }
 
   @override
-  Future updateUserLocally({required UserEntity user}) async {
-    var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
-    await Prefs.setString(kUserData, jsonData);
+  Future<Either<Failures, Unit>> updateUserLocally({
+    required UserEntity user,
+  }) async {
+    try {
+      var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
+      await Prefs.setString(kUserData, jsonData);
+      return const Right(unit);
+    } catch (e) {
+      log('Exception in updateUserLocally: ${e.toString()}');
+      return Left(ServerFailure(message: e.toString()));
+    }
   }
 
   @override
-  Future deleteUserLocally() async {
-    await Prefs.deleteString(kUserData);
+  Future<Either<Failures, Unit>> deleteUserLocally() async {
+    try {
+      await Prefs.deleteString(kUserData);
+      return const Right(unit);
+    } catch (e) {
+      log('Exception in deleteUserLocally: ${e.toString()}');
+      return Left(ServerFailure(message: e.toString()));
+    }
   }
 
   @override
-  Future signOut() async {
-    await deleteUserLocally();
-    await firebaseAuthService.signOut();
+  Future<Either<Failures, Unit>> signOut() async {
+    try {
+      await deleteUserLocally();
+      await firebaseAuthService.signOut();
+      return const Right(unit);
+    } catch (e) {
+      log('Exception in signOut: ${e.toString()}');
+      return Left(ServerFailure(message: e.toString()));
+    }
   }
 
   @override
@@ -184,7 +259,16 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<void> updateUserEmail({required String newEmail}) async {
-    await firebaseAuthService.updateEmail(newEmail);
+  Future<Either<Failures, Unit>> updateUserEmail({
+    required String newEmail,
+  }) async {
+    try {
+      await firebaseAuthService.updateEmail(newEmail);
+
+      return const Right(unit);
+    } catch (e) {
+      log('Exception in updateUserEmail: ${e.toString()}');
+      return Left(ServerFailure(message: e.toString()));
+    }
   }
 }

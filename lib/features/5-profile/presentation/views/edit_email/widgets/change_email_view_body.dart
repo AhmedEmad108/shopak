@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopak/contants.dart';
 import 'package:shopak/core/helper_functions/get_user.dart';
 import 'package:shopak/core/helper_functions/valid_input.dart';
+import 'package:shopak/core/utils/app_color.dart';
 import 'package:shopak/core/widgets/custom_dialog.dart';
 import 'package:shopak/core/widgets/custom_floating_button.dart';
 import 'package:shopak/core/widgets/custom_text_field.dart';
@@ -25,7 +26,7 @@ class _ChangeEmailViewBodyState extends State<ChangeEmailViewBody> {
 
   @override
   void initState() {
-    emailController.text = user2.email;
+    emailController.text = '@gmail.com';
     super.initState();
   }
 
@@ -47,6 +48,20 @@ class _ChangeEmailViewBodyState extends State<ChangeEmailViewBody> {
             autovalidateMode: autoValidateMode,
             child: Column(
               children: [
+                const SizedBox(height: 20),
+                Text(
+                  S.of(context).your_new_email,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium!.copyWith(height: 1.5),
+                ),
+                Text(
+                  user2.email,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: AppColor.primaryColor,
+                    // height: 1.5,
+                  ),
+                ),
                 const SizedBox(height: 20),
                 CustomTextField(
                   hintText: S.of(context).enter_email,

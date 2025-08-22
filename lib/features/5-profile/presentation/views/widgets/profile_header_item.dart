@@ -24,7 +24,6 @@ class ProfileHeaderItem extends StatelessWidget {
             radius: 50,
             urlImage: user.image,
             onFileChanged: (String? value) {
-              print('current image: ${user.image}');
               context.read<UserCubit>().editUserImage(image: value!);
             },
           ),
@@ -32,7 +31,7 @@ class ProfileHeaderItem extends StatelessWidget {
           ConstrainedBox(
             constraints: BoxConstraints(
               maxWidth: size.width * 0.48,
-              maxHeight: 70,
+              maxHeight: 100,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,6 +50,19 @@ class ProfileHeaderItem extends StatelessWidget {
                     fit: BoxFit.scaleDown,
                     child: Text(
                       user.email,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      user.role,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.secondary,
                       ),

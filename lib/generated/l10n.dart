@@ -941,6 +941,16 @@ class S {
     );
   }
 
+  /// `Your new email address must be different from previous used email.`
+  String get your_new_email {
+    return Intl.message(
+      'Your new email address must be different from previous used email.',
+      name: 'your_new_email',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Congratulations!`
   String get congratulations {
     return Intl.message(
@@ -1766,6 +1776,56 @@ class S {
     return Intl.message(
       'Are you sure you want to logout?',
       name: 'logout_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sellers Requests`
+  String get sellers_requests {
+    return Intl.message(
+      'Sellers Requests',
+      name: 'sellers_requests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage Sellers`
+  String get manage_sellers {
+    return Intl.message(
+      'Manage Sellers',
+      name: 'manage_sellers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage Users`
+  String get manage_users {
+    return Intl.message(
+      'Manage Users',
+      name: 'manage_users',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Admin Panel`
+  String get admin_panel {
+    return Intl.message('Admin Panel', name: 'admin_panel', desc: '', args: []);
+  }
+
+  /// `Add Address`
+  String get add_address {
+    return Intl.message('Add Address', name: 'add_address', desc: '', args: []);
+  }
+
+  /// `Remove Address`
+  String get remove_address {
+    return Intl.message(
+      'Remove Address',
+      name: 'remove_address',
       desc: '',
       args: [],
     );

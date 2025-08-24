@@ -253,6 +253,13 @@
   "edit_address": "Edit Address",
   "select_primary_address": "Select Primary Address",
   "make_primary_address": "Make Primary Address",
+  "password_must_have_uppercase": "Password must contain at least one uppercase letter",
+  "password_must_have_lowercase": "Password must contain at least one lowercase letter",
+  "password_must_have_number": "Password must contain at least one number",
+  "password_not_match": "Passwords do not match",
+  "not_valid_url": "Not a valid URL",
+  "not_valid_date": "Not a valid date",
+  "not_valid_input": "Not a valid input",
 
 
   "name_vendor_en": "Name Vendor in English",

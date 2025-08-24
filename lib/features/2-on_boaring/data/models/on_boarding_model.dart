@@ -6,11 +6,13 @@ class OnBoardingModel {
   final String subTitle;
   final String description;
   final Color backGroundColor;
-  OnBoardingModel({
+  final bool rtl;
+  OnBoardingModel( {
     required this.image,
     required this.title,
     required this.subTitle,
     required this.description,
     required this.backGroundColor,
+    required this.rtl
   });
 }

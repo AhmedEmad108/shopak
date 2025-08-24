@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:shopak/core/utils/app_color.dart';
+import 'package:shopak/core/utils/app_style.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     this.onTap,
-    required this.title,
-    required this.buttonColor,
-    required this.textStyle,
+    this.title,
+    this.buttonColor,
+    this.textStyle,
     this.width = double.infinity,
     this.height = 54,
+    this.child,
   });
   final void Function()? onTap;
-  final String title;
-  final Color buttonColor;
-  final TextStyle textStyle;
+  final String? title;
+  final Color? buttonColor;
+  final TextStyle? textStyle;
   final double width, height;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +28,19 @@ class CustomButton extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: buttonColor,
+          color: buttonColor ?? AppColor.primaryColor,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: textStyle,
-          ),
+          child:
+              child ??
+              Text(
+                title!,
+                textAlign: TextAlign.center,
+                style:
+                    textStyle ??
+                    AppStyle.styleBold24().copyWith(color: AppColor.white),
+              ),
         ),
       ),
     );

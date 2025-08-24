@@ -275,10 +275,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "not_valid_address": MessageLookupByLibrary.simpleMessage(
       "Not Valid Address",
     ),
+    "not_valid_date": MessageLookupByLibrary.simpleMessage("Not a valid date"),
     "not_valid_email": MessageLookupByLibrary.simpleMessage("Not Valid Email"),
+    "not_valid_input": MessageLookupByLibrary.simpleMessage(
+      "Not a valid input",
+    ),
     "not_valid_name": MessageLookupByLibrary.simpleMessage("Not Valid Name"),
     "not_valid_phone": MessageLookupByLibrary.simpleMessage("Not Valid Phone"),
     "not_valid_price": MessageLookupByLibrary.simpleMessage("Not Valid Price"),
+    "not_valid_url": MessageLookupByLibrary.simpleMessage("Not a valid URL"),
     "ok": MessageLookupByLibrary.simpleMessage("Ok"),
     "or": MessageLookupByLibrary.simpleMessage("   OR SIGN IN WITH   "),
     "or_continue_with": MessageLookupByLibrary.simpleMessage(
@@ -296,6 +301,18 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Password and confirm password not match",
         ),
+    "password_must_have_lowercase": MessageLookupByLibrary.simpleMessage(
+      "Password must contain at least one lowercase letter",
+    ),
+    "password_must_have_number": MessageLookupByLibrary.simpleMessage(
+      "Password must contain at least one number",
+    ),
+    "password_must_have_uppercase": MessageLookupByLibrary.simpleMessage(
+      "Password must contain at least one uppercase letter",
+    ),
+    "password_not_match": MessageLookupByLibrary.simpleMessage(
+      "Passwords do not match",
+    ),
     "password_updated_failed": MessageLookupByLibrary.simpleMessage(
       "Password updated failed",
     ),

@@ -242,6 +242,13 @@
   "edit_address": "تعديل العنوان",
   "select_primary_address": "تحديد العنوان الرئيسي",
   "make_primary_address": "جعل العنوان الرئيسي",
+  "password_must_have_uppercase": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل",
+  "password_must_have_lowercase": "كلمة المرور يجب أن تحتوي على حرف صغير واحد على الأقل",
+  "password_must_have_number": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
+  "password_not_match": "كلمتا المرور غير متطابقتين",
+   "not_valid_url": "رابط غير صالح",
+  "not_valid_date": "تاريخ غير صالح",
+  "not_valid_input": "إدخال غير صالح",
 
 
   "name_vendor_en": "اسم البائع بالانجليزي",

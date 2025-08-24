@@ -16,24 +16,6 @@ class CustomChangeLangItem extends StatefulWidget {
 }
 
 class _CustomChangeLangItemState extends State<CustomChangeLangItem> {
-  List<LangClass> get langList => [
-    LangClass(
-      locale: 'system',
-      name: S.of(context).device,
-      name2: S.of(context).device_language,
-    ),
-    LangClass(
-      locale: 'en',
-      name: S.of(context).english,
-      name2: S.of(context).english_language,
-    ),
-    LangClass(
-      locale: 'ar',
-      name: S.of(context).arabic,
-      name2: S.of(context).arabic_language,
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LangCubit, LangState>(
@@ -48,7 +30,7 @@ class _CustomChangeLangItemState extends State<CustomChangeLangItem> {
             borderRadius: BorderRadius.circular(8),
             elevation: 0,
             items:
-                langList.map((lang) {
+                langList(context: context).map((lang) {
                   return DropdownMenuItem<String>(
                     value: lang.locale,
                     child: Text(lang.name, style: AppStyle.styleSemiBold22()),
@@ -66,7 +48,7 @@ class _CustomChangeLangItemState extends State<CustomChangeLangItem> {
               customSnackBar(
                 context,
                 message:
-                    '${newLang.language_changed_to} ${langList.firstWhere((lang) => lang.locale == value).name2}',
+                    '${newLang.language_changed_to} ${langList(context: context).firstWhere((lang) => lang.locale == value).name2}',
               );
             },
           ),

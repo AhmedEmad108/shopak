@@ -3,6 +3,7 @@ import 'package:shopak/contants.dart';
 import 'package:shopak/core/services/shared_prefrences_singletone.dart';
 import 'package:shopak/core/utils/app_color.dart';
 import 'package:shopak/core/utils/app_images.dart';
+import 'package:shopak/core/widgets/rtl_imagr.dart';
 import 'package:shopak/features/2-on_boaring/data/models/on_boarding_list.dart';
 import 'package:shopak/features/2-on_boaring/data/models/on_boarding_model.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_in_view.dart';
@@ -19,7 +20,6 @@ class OnBoardingItem extends StatelessWidget {
   final dynamic currentPage;
   @override
   Widget build(BuildContext context) {
-    String sharLang = Prefs.getString('lang');
     return Column(
       children: [
         SizedBox(
@@ -39,13 +39,17 @@ class OnBoardingItem extends StatelessWidget {
                 bottom: -15,
                 left: 0,
                 right: 0,
-                child: Image.asset(onBoardingModel.image, height: 200),
+                child: RtlImage(
+                  path: onBoardingModel.image,
+                  rtl: onBoardingModel.rtl,
+                  height: 200,
+                ),
               ),
+
               Visibility(
                 visible: currentPage != onBoardingList.length - 1,
-                child: Positioned(
-                  right: sharLang == 'en' ? 0 : null,
-                  left: sharLang == 'en' ? null : 0,
+                child: PositionedDirectional(
+                  end: 0,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,

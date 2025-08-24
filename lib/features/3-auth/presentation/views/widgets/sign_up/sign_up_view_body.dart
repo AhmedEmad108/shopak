@@ -55,7 +55,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   return validInput(
                     context: context,
                     val: value!,
-                    type: 'name',
+                    type: 'text',
                     max: 20,
                     min: 3,
                   );

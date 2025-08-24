@@ -4,7 +4,9 @@ import 'package:shopak/contants.dart';
 import 'package:shopak/core/cubit/user/user_cubit.dart';
 import 'package:shopak/core/helper_functions/get_user.dart';
 import 'package:shopak/core/helper_functions/valid_input.dart';
-import 'package:shopak/core/services/shared_prefrences_singletone.dart';
+import 'package:shopak/core/utils/app_color.dart';
+import 'package:shopak/core/utils/app_style.dart';
+import 'package:shopak/core/widgets/custom_button.dart';
 import 'package:shopak/core/widgets/custom_floating_button.dart';
 import 'package:shopak/core/widgets/custom_image_picker.dart';
 import 'package:shopak/core/widgets/custom_text_field.dart';
@@ -70,7 +72,6 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   }
 
   void showAddressBottomSheet(BuildContext context) {
-    final lang = Prefs.getString('lang') ?? 'system';
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -109,44 +110,54 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                                 hintText: S.of(context).enter_address,
                                 labels: "${S.of(context).address} ${index + 1}",
                                 controller: addressControllers[index],
+                                // color:
+                                //     index == primaryIndex!
+                                //         ? AppColor.background2Color
+                                //         : null,
+                                isPrimary: index == primaryIndex ? true : null,
                                 validator:
                                     (value) => validInput(
                                       context: context,
                                       val: value!,
-                                      type: 'name',
+                                      type: 'text',
                                       max: 50,
                                       min: 3,
                                     ),
                                 keyboardType: TextInputType.streetAddress,
-                                suffixIcon: const Icon(
-                                  Icons.location_on_outlined,
+                                prefixIcon: Tooltip(
+                                  message: S.of(context).select_primary_address,
+                                  child: Radio<int>(
+                                    value: index,
+                                    groupValue: primaryIndex,
+                                    onChanged: (value) {
+                                      setSheetState(() {
+                                        primaryIndex = value!;
+                                      });
+                                      setState(() {
+                                        primaryIndex = value!;
+                                      });
+                                    },
+                                    activeColor: Theme.of(context).primaryColor,
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Tooltip(
-                              message: S.of(context).select_primary_address,
-                              child: Radio<int>(
-                                value: index,
-                                groupValue: primaryIndex,
-                                onChanged: (value) {
-                                  setSheetState(() {
-                                    primaryIndex = value!;
-                                  });
-                                  setState(() {
-                                    primaryIndex = value!;
-                                  });
-                                },
-                                activeColor: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                            IconButton(
-                              tooltip: S.of(context).remove_address,
-                              onPressed: () {
-                                setSheetState(() => removeAddress(index));
-                              },
-                              icon: const Icon(
-                                Icons.delete_outlined,
-                                color: Colors.red,
+                                suffixIcon: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Icon(Icons.location_on_outlined),
+                                    IconButton(
+                                      tooltip: S.of(context).remove_address,
+                                      onPressed: () {
+                                        setSheetState(
+                                          () => removeAddress(index),
+                                        );
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete_outlined,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -155,18 +166,26 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                       separatorBuilder:
                           (context, index) => const SizedBox(height: 16),
                     ),
-                    // const SizedBox(height: 16),
-                    Align(
-                      alignment:
-                          lang == 'ar'
-                              ? Alignment.centerLeft
-                              : Alignment.centerRight,
-                      child: TextButton.icon(
-                        onPressed: () {
-                          setSheetState(() => addAddress());
-                        },
-                        icon: const Icon(Icons.add_location_alt_outlined),
-                        label: Text(S.of(context).add_address),
+                    const SizedBox(height: 16),
+                    CustomButton(
+                      onTap: () {
+                        setSheetState(() => addAddress());
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.add_location_alt_outlined,
+                            color: AppColor.white,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            S.of(context).add_address,
+                            style: AppStyle.styleBold24().copyWith(
+                              color: AppColor.white,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -211,7 +230,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                     return validInput(
                       context: context,
                       val: value!,
-                      type: 'name',
+                      type: 'text',
                       max: 20,
                       min: 3,
                     );
@@ -255,18 +274,26 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                             (value) => validInput(
                               context: context,
                               val: value!,
-                              type: 'name',
+                              type: 'text',
                               max: 50,
                               min: 3,
                             ),
                         keyboardType: TextInputType.streetAddress,
-                        suffixIcon: const Icon(Icons.location_on_outlined),
+                        suffixIcon: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.location_on_outlined),
+                            IconButton(
+                              onPressed: () => showAddressBottomSheet(context),
+                              icon: const Icon(
+                                Icons.edit_location_alt_outlined,
+                                color: AppColor.primaryColor,
+                              ),
+                              tooltip: S.of(context).edit_address,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () => showAddressBottomSheet(context),
-                      icon: const Icon(Icons.edit_location_alt_outlined),
-                      tooltip: S.of(context).edit_address,
                     ),
                   ],
                 ),

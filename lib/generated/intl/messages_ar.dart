@@ -279,14 +279,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "not_valid_address": MessageLookupByLibrary.simpleMessage(
       "العنوان غير صالح",
     ),
+    "not_valid_date": MessageLookupByLibrary.simpleMessage("تاريخ غير صالح"),
     "not_valid_email": MessageLookupByLibrary.simpleMessage(
       "البريد الالكتروني غير صالح",
     ),
+    "not_valid_input": MessageLookupByLibrary.simpleMessage("إدخال غير صالح"),
     "not_valid_name": MessageLookupByLibrary.simpleMessage("الاسم غير صالح"),
     "not_valid_phone": MessageLookupByLibrary.simpleMessage(
       "رقم الهاتف غير صالح",
     ),
     "not_valid_price": MessageLookupByLibrary.simpleMessage("السعر غير صالح"),
+    "not_valid_url": MessageLookupByLibrary.simpleMessage("رابط غير صالح"),
     "ok": MessageLookupByLibrary.simpleMessage("حسنا"),
     "or": MessageLookupByLibrary.simpleMessage("   او تسجيل الدخول بواسطة   "),
     "or_continue_with": MessageLookupByLibrary.simpleMessage("أو"),
@@ -302,6 +305,18 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
         ),
+    "password_must_have_lowercase": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور يجب أن تحتوي على حرف صغير واحد على الأقل",
+    ),
+    "password_must_have_number": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
+    ),
+    "password_must_have_uppercase": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل",
+    ),
+    "password_not_match": MessageLookupByLibrary.simpleMessage(
+      "كلمتا المرور غير متطابقتين",
+    ),
     "password_updated_failed": MessageLookupByLibrary.simpleMessage(
       "فشل تحديث كلمة المرور",
     ),

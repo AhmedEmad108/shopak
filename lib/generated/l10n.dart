@@ -1866,6 +1866,76 @@ class S {
     );
   }
 
+  /// `Password must contain at least one uppercase letter`
+  String get password_must_have_uppercase {
+    return Intl.message(
+      'Password must contain at least one uppercase letter',
+      name: 'password_must_have_uppercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must contain at least one lowercase letter`
+  String get password_must_have_lowercase {
+    return Intl.message(
+      'Password must contain at least one lowercase letter',
+      name: 'password_must_have_lowercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must contain at least one number`
+  String get password_must_have_number {
+    return Intl.message(
+      'Password must contain at least one number',
+      name: 'password_must_have_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get password_not_match {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'password_not_match',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not a valid URL`
+  String get not_valid_url {
+    return Intl.message(
+      'Not a valid URL',
+      name: 'not_valid_url',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not a valid date`
+  String get not_valid_date {
+    return Intl.message(
+      'Not a valid date',
+      name: 'not_valid_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not a valid input`
+  String get not_valid_input {
+    return Intl.message(
+      'Not a valid input',
+      name: 'not_valid_input',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name Vendor in English`
   String get name_vendor_en {
     return Intl.message(

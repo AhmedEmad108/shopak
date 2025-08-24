@@ -10,6 +10,7 @@ List<OnBoardingModel> onBoardingList = [
     title: S.current.welcome_to_shopak,
     subTitle: S.current.start_shopping,
     description: S.current.from_electronics_to_fashion,
+    rtl: false,
   ),
   OnBoardingModel(
     image: Assets.imagesSearchPng,
@@ -17,12 +18,14 @@ List<OnBoardingModel> onBoardingList = [
     title: S.current.browse_shop,
     subTitle: S.current.explore_products,
     description: S.current.pick_suits,
+    rtl: true,
   ),
   OnBoardingModel(
-    image: Assets.imagesDelivery,
+    image: Assets.imagesDelivery2,
     backGroundColor: AppColor.background3Color,
     title: S.current.order_delivered,
     subTitle: S.current.order_quickly,
     description: S.current.with_shopak,
+    rtl: true,
   ),
 ];

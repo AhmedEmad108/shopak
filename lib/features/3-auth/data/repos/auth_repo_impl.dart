@@ -254,4 +254,15 @@ class AuthRepoImpl implements AuthRepo {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+  
+  @override
+  Future<Either<Failures, Unit>> resetPassword({required String email})async {
+    try {
+      await firebaseAuthService.resetPassword(email);
+      return const Right(unit);
+    } catch (e) {
+      log('Exception in resetPassword: ${e.toString()}');
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
 }

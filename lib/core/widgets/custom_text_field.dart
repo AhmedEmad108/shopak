@@ -18,6 +18,8 @@ class CustomTextField extends StatelessWidget {
     this.isNember = false,
     this.prefixIcon,
     required this.keyboardType,
+    this.color,
+    this.isPrimary,
   });
   final bool expanded;
   final String hintText;
@@ -33,6 +35,8 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool? obscureText;
   final bool isNember;
+  final Color? color;
+  final bool? isPrimary;
 
   @override
   Widget build(BuildContext context) {
@@ -53,18 +57,24 @@ class CustomTextField extends StatelessWidget {
       // obscureText: obscureText == null || obscureText == false ? false : true,
       cursorColor: AppColor.primaryColor,
       decoration: InputDecoration(
-          // contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          // labelStyle: const TextStyle(color: Color(0xff39A2DB)),
-          label: Text(labels ?? ''),
-          // labelText: labels,
-          suffixIcon: suffixIcon,
-          prefixIcon: prefixIcon,
-          hintText: hintText,
-          hintStyle: Theme.of(context).textTheme.bodySmall,
-          border: buildBorder(),
-          enabledBorder: buildBorder(),
-          focusedBorder: buildBorder(
-              boolien == false ? AppColor.primaryColor : Colors.grey)),
+        // contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        // labelStyle: const TextStyle(color: Color(0xff39A2DB)),
+        label: Text(labels ?? ''),
+        // labelText: labels,
+        suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
+        hintText: hintText,
+        hintStyle: Theme.of(context).textTheme.bodySmall,
+        fillColor: color,
+        filled: color != null ? true : false,
+        border: buildBorder(),
+        enabledBorder: buildBorder(
+          isPrimary == true ? AppColor.primaryColor : null,
+        ),
+        focusedBorder: buildBorder(
+          boolien == false ? AppColor.primaryColor : Colors.grey,
+        ),
+      ),
     );
   }
 

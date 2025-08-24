@@ -217,7 +217,7 @@ class _BecomeSellerViewBodyState extends State<BecomeSellerViewBody> {
                           return validInput(
                             context: context,
                             val: nameVendorEn.text,
-                            type: 'name',
+                            type: 'text',
                             max: 20,
                             min: 5,
                           );
@@ -233,7 +233,7 @@ class _BecomeSellerViewBodyState extends State<BecomeSellerViewBody> {
                           return validInput(
                             context: context,
                             val: nameVendorAr.text,
-                            type: 'name',
+                            type: 'text',
                             max: 20,
                             min: 5,
                           );
@@ -265,7 +265,7 @@ class _BecomeSellerViewBodyState extends State<BecomeSellerViewBody> {
                           return validInput(
                             context: context,
                             val: address.text,
-                            type: 'address',
+                            type: 'text',
                             max: 50,
                             min: 5,
                           );

@@ -193,4 +193,15 @@ class FirebaseAuthService {
       );
     }
   }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      log('Exception in FirebaseAuthService.resetPassword: ${e.toString()}');
+      throw CustomException(
+        message: 'Something went wrong. Please try again later.',
+      );
+    }
+  }
 }

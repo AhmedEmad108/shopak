@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:shopak/features/2-on_boaring/presentation/views/on_boarding_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_in_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_up_view.dart';
+import 'package:shopak/features/3-auth/presentation/views/widgets/resetpassword/check_email_view.dart';
+import 'package:shopak/features/3-auth/presentation/views/widgets/resetpassword/reset_password_view.dart';
+import 'package:shopak/features/3-auth/presentation/views/widgets/resetpassword/success_reset_password_view.dart';
+import 'package:shopak/features/3-auth/presentation/views/widgets/resetpassword/verify_code_view.dart';
 import 'package:shopak/features/4-main_view/presentation/views/main_view.dart';
 import 'package:shopak/features/5-profile/presentation/views/become_seller/become_seller_view.dart';
 import 'package:shopak/features/5-profile/presentation/views/chang_password/change_password_view.dart';
@@ -26,21 +30,21 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case (MainView.routeName):
       return MaterialPageRoute(builder: (context) => const MainView());
 
-    // case (CheckEmailView.routeName):
-    //   return MaterialPageRoute(builder: (context) => const CheckEmailView());
+    case (CheckEmailView.routeName):
+      return MaterialPageRoute(builder: (context) => const CheckEmailView());
 
-    // case (VerifyCodeResetPassView.routeName):
-    //   return MaterialPageRoute(
-    //       builder: (context) => VerifyCodeResetPassView(
-    //             email: settings.arguments as String,
-    //           ));
+    case (VerifyCodeResetPassView.routeName):
+      return MaterialPageRoute(
+          builder: (context) => VerifyCodeResetPassView(
+                email: settings.arguments as String,
+              ));
 
-    // case (ResetPasswordView.routeName):
-    //   return MaterialPageRoute(builder: (context) => const ResetPasswordView());
+    case (ResetPasswordView.routeName):
+      return MaterialPageRoute(builder: (context) => const ResetPasswordView());
 
-    // case (SuccessResetPasswordView.routeName):
-    //   return MaterialPageRoute(
-    //       builder: (context) => const SuccessResetPasswordView());
+    case (SuccessResetPasswordView.routeName):
+      return MaterialPageRoute(
+          builder: (context) => const SuccessResetPasswordView());
     // case (DashboardView.routeName):
     //   return MaterialPageRoute(builder: (context) => const DashboardView());
     // case (ProfileView.routeName):

@@ -30,6 +30,14 @@ class Assets {
   /// assets/images/delivery.png
   static const String imagesDelivery = "assets/images/delivery.png";
 
+  /// Assets for imagesDelivery2
+  /// assets/images/delivery2.png
+  static const String imagesDelivery2 = "assets/images/delivery2.png";
+
+  /// Assets for imagesDone
+  /// assets/images/done.svg
+  static const String imagesDone = "assets/images/done.svg";
+
   /// Assets for imagesError
   /// assets/images/error.svg
   static const String imagesError = "assets/images/error.svg";

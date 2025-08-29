@@ -43,6 +43,7 @@ class _CustomProfileItemState extends State<CustomProfileItem> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               CustomListTile(
                 title: S.of(context).edit_profile,

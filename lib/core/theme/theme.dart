@@ -30,9 +30,10 @@ ThemeData lightTheme = ThemeData(
   textTheme: TextTheme(
     bodySmall: AppStyle.styleSemiBold18().copyWith(color: AppColor.grey2),
     bodyMedium: AppStyle.styleSemiBold22().copyWith(color: AppColor.black),
+    titleSmall: AppStyle.styleSemiBold18().copyWith(color: AppColor.black),
     titleLarge: AppStyle.styleBold30(),
     // bodyMedium: TextStyle(
-    //   color: AppColor.black,
+    //   color: AppColor.black, 
     // ),
   ),
   // iconTheme: const IconThemeData(
@@ -72,6 +73,7 @@ ThemeData darkTheme = ThemeData(
   textTheme: TextTheme(
     bodySmall: AppStyle.styleSemiBold18().copyWith(color: AppColor.grey2),
     bodyMedium: AppStyle.styleSemiBold22().copyWith(color: AppColor.white),
+    titleSmall: AppStyle.styleSemiBold18().copyWith(color: AppColor.white),
     titleLarge: AppStyle.styleBold30().copyWith(color: AppColor.white),
   ),
 );

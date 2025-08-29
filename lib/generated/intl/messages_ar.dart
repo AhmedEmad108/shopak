@@ -25,15 +25,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "active": MessageLookupByLibrary.simpleMessage("نشط"),
     "active_categories": MessageLookupByLibrary.simpleMessage("الفئات النشطة"),
     "active_products": MessageLookupByLibrary.simpleMessage("المنتجات النشطة"),
+    "active_users": MessageLookupByLibrary.simpleMessage("المستخدمين النشطين"),
     "add": MessageLookupByLibrary.simpleMessage("اضافة"),
     "add_address": MessageLookupByLibrary.simpleMessage("اضافة عنوان"),
     "add_category": MessageLookupByLibrary.simpleMessage("اضافة فئة"),
     "add_product": MessageLookupByLibrary.simpleMessage("اضافة منتج"),
     "address": MessageLookupByLibrary.simpleMessage("العنوان"),
+    "addresses": MessageLookupByLibrary.simpleMessage("العناوين"),
+    "admin": MessageLookupByLibrary.simpleMessage("مدير"),
     "admin_panel": MessageLookupByLibrary.simpleMessage("لوحة التحكم"),
     "agree_continue": MessageLookupByLibrary.simpleMessage("موافق ومتابعة"),
     "all_categories": MessageLookupByLibrary.simpleMessage("كل الفئات"),
     "all_products": MessageLookupByLibrary.simpleMessage("كل المنتجات"),
+    "all_users": MessageLookupByLibrary.simpleMessage("كل المستخدمين"),
     "already_have_an_account": MessageLookupByLibrary.simpleMessage(
       "لديك حساب؟",
     ),
@@ -73,6 +77,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "change_password": MessageLookupByLibrary.simpleMessage(
       "تغيير كلمة المرور",
     ),
+    "change_role": MessageLookupByLibrary.simpleMessage("تغيير الدور"),
+    "change_status": MessageLookupByLibrary.simpleMessage("تغيير الحالة"),
     "change_theme": MessageLookupByLibrary.simpleMessage("تغيير التصميم"),
     "check_code": MessageLookupByLibrary.simpleMessage("تحقق من رمزك"),
     "check_your_email": MessageLookupByLibrary.simpleMessage(
@@ -85,6 +91,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "confirm_delete_message_product": MessageLookupByLibrary.simpleMessage(
       "هل تريد حذف هذا المنتج؟",
+    ),
+    "confirm_delete_message_user": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد من حذف هذا المستخدم؟",
     ),
     "confirm_delete_title": MessageLookupByLibrary.simpleMessage(
       "تأكيد الحذف",
@@ -110,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "create_new_password": MessageLookupByLibrary.simpleMessage(
       "انشاء كلمة مرور جديدة",
     ),
+    "created_at": MessageLookupByLibrary.simpleMessage("تم الانشاء في"),
     "current_password": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الحالية",
     ),
@@ -119,6 +129,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "delete_category": MessageLookupByLibrary.simpleMessage("حذف الفئة"),
     "delete_product": MessageLookupByLibrary.simpleMessage("حذف المنتج"),
+    "delete_user": MessageLookupByLibrary.simpleMessage("حذف المستخدم"),
+    "detail": MessageLookupByLibrary.simpleMessage("تفاصيل"),
+    "details": MessageLookupByLibrary.simpleMessage("التفاصيل"),
     "device": MessageLookupByLibrary.simpleMessage("الجهاز"),
     "device_language": MessageLookupByLibrary.simpleMessage("لغة الجهاز"),
     "device_mode": MessageLookupByLibrary.simpleMessage("ثيم الجهاز"),
@@ -137,6 +150,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "edit_product": MessageLookupByLibrary.simpleMessage("تعديل المنتج"),
     "edit_profile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
+    "email_not_verified": MessageLookupByLibrary.simpleMessage(
+      "لم يتم التحقق من البريد الالكتروني",
+    ),
+    "email_verification_status": MessageLookupByLibrary.simpleMessage(
+      "حالة التحقق من البريد الالكتروني",
+    ),
+    "email_verified": MessageLookupByLibrary.simpleMessage(
+      "تم التحقق من البريد الالكتروني",
+    ),
     "empty_search_results": MessageLookupByLibrary.simpleMessage(
       "لا توجد نتائج للبحث",
     ),
@@ -227,6 +249,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "inactive_products": MessageLookupByLibrary.simpleMessage(
       "المنتجات غير النشطة",
     ),
+    "inactive_users": MessageLookupByLibrary.simpleMessage(
+      "المستخدمين غير نشطين",
+    ),
     "invalid_current_password": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الحالية غير صالحة",
     ),
@@ -239,10 +264,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalid_username": MessageLookupByLibrary.simpleMessage(
       "الرجاء إدخال اسم مستخدم صحيح",
     ),
+    "is_email_verified": MessageLookupByLibrary.simpleMessage(
+      "هل تم التحقق من البريد الالكتروني؟",
+    ),
     "is_featured_item": MessageLookupByLibrary.simpleMessage("هل هو منتج مميز"),
     "language_changed_to": MessageLookupByLibrary.simpleMessage(
       "تم تغيير اللغة إلى",
     ),
+    "last_login": MessageLookupByLibrary.simpleMessage("آخر تسجيل دخول"),
     "le": MessageLookupByLibrary.simpleMessage("جنيه مصري"),
     "light": MessageLookupByLibrary.simpleMessage("فاتح"),
     "light_mode": MessageLookupByLibrary.simpleMessage("الوضع الفاتح"),
@@ -276,6 +305,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_categories_found": MessageLookupByLibrary.simpleMessage("لا يوجد فئات"),
     "no_data": MessageLookupByLibrary.simpleMessage("لا يوجد بيانات"),
     "no_products_found": MessageLookupByLibrary.simpleMessage("لا يوجد منتجات"),
+    "no_users_found": MessageLookupByLibrary.simpleMessage(
+      "لم يتم العثور على مستخدمين",
+    ),
     "not_valid_address": MessageLookupByLibrary.simpleMessage(
       "العنوان غير صالح",
     ),
@@ -392,6 +424,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "اعادة تعيين كلمة المرور",
     ),
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+    "role": MessageLookupByLibrary.simpleMessage("الدور"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
     "save_changes_message": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد من حفظ هذه التغييرات؟",
@@ -400,6 +433,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "search_categories": MessageLookupByLibrary.simpleMessage("بحث عن فئة..."),
     "search_for_products": MessageLookupByLibrary.simpleMessage(
       "ابحث عن منتجاتك",
+    ),
+    "search_users": MessageLookupByLibrary.simpleMessage("ابحث عن مستخدم..."),
+    "search_users_by_name_or_email": MessageLookupByLibrary.simpleMessage(
+      "ابحث عن مستخدم بالاسم او البريد الالكتروني",
     ),
     "see_all": MessageLookupByLibrary.simpleMessage("اظهار الكل"),
     "select_city": MessageLookupByLibrary.simpleMessage("اختر مدينتك"),
@@ -410,6 +447,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "select_primary_address": MessageLookupByLibrary.simpleMessage(
       "تحديد العنوان الرئيسي",
     ),
+    "seller": MessageLookupByLibrary.simpleMessage("بائع"),
     "sellers_requests": MessageLookupByLibrary.simpleMessage("طلبات البائعين"),
     "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
     "shop_now": MessageLookupByLibrary.simpleMessage("تسوق الان"),
@@ -429,6 +467,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "start_shopping": MessageLookupByLibrary.simpleMessage(
       "ابدأ رحلة التسوق الخاصة بك مع شوبك",
     ),
+    "status": MessageLookupByLibrary.simpleMessage("الحالة"),
     "successfully_created_account": MessageLookupByLibrary.simpleMessage(
       "تم انشاء الحساب بنجاح",
     ),
@@ -451,6 +490,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم تغيير الثيم إلى",
     ),
     "update": MessageLookupByLibrary.simpleMessage("تحديث"),
+    "updated_at": MessageLookupByLibrary.simpleMessage("تم التحديث في"),
+    "user": MessageLookupByLibrary.simpleMessage("مستخدم"),
+    "user_deleted_successfully": MessageLookupByLibrary.simpleMessage(
+      "تم حذف المستخدم بنجاح",
+    ),
+    "user_name": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
+    "user_status_changed_successfully": MessageLookupByLibrary.simpleMessage(
+      "تم تغيير حالة المستخدم بنجاح",
+    ),
     "vendor_address": MessageLookupByLibrary.simpleMessage("عنوان البائع"),
     "vendor_message": MessageLookupByLibrary.simpleMessage(
       "لتصبح بائعا، يجب تعبئة النموذج التالي. سيتم مراجعة طلبك والحصول على ردك في اسرع وقت ممكن.",

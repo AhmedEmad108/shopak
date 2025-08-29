@@ -125,6 +125,40 @@ class UserModel extends UserEntity {
     );
   }
 
+  toJson() {
+    return {
+      'uId': uId,
+      'email': email,
+      'name': name,
+      'phone': phone,
+      'image': image,
+      'address': address,
+      'primaryIndex': primaryIndex,
+      'isActive': isActive,
+      'isEmailVerified': isEmailVerified,
+      'role': role,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+      'lastLogin': lastLogin.toIso8601String(),
+    };
+  }
+
+  UserEntity toEntity() {
+    return UserEntity(
+      uId: uId,
+      email: email,
+      name: name,
+      phone: phone,
+      image: image,
+      isActive: isActive,
+      isEmailVerified: isEmailVerified,
+      role: role,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      lastLogin: lastLogin,
+    );
+  }
+
   /// 🟡 Helper: للتعامل مع Firestore Timestamp أو String ISO
   static DateTime fromTimestamp(dynamic value) {
     if (value == null) return DateTime.now();

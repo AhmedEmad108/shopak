@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserEntity {
   final String uId;
   final String email;
@@ -40,9 +42,9 @@ class UserEntity {
       isActive: map['isActive'] as bool,
       isEmailVerified: map['isEmailVerified'] as bool,
       role: map['role'] as String,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
-      lastLogin: DateTime.parse(map['lastLogin'] as String),
+      createdAt: parseDate(map['createdAt']),
+      updatedAt: parseDate(map['updatedAt']),
+      lastLogin: parseDate(map['lastLogin']),
     );
   }
 
@@ -58,9 +60,9 @@ class UserEntity {
       'isActive': isActive,
       'isEmailVerified': isEmailVerified,
       'role': role,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
-      'lastLogin': lastLogin.toIso8601String(),
+      'createdAt': Timestamp.fromDate(createdAt),
+      'updatedAt': Timestamp.fromDate(updatedAt),
+      'lastLogin': Timestamp.fromDate(lastLogin),
     };
   }
 
@@ -94,5 +96,28 @@ class UserEntity {
       updatedAt: updatedAt ?? this.updatedAt,
       lastLogin: lastLogin ?? this.lastLogin,
     );
+  }
+
+  factory UserEntity.fromJson(Map<String, dynamic> json) {
+    return UserEntity(
+      uId: json['uId'],
+      email: json['email'],
+      name: json['name'],
+      phone: json['phone'],
+      image: json['image'],
+      isActive: json['isActive'],
+      isEmailVerified: json['isEmailVerified'],
+      role: json['role'],
+      createdAt: json['createdAt'],
+      updatedAt: json['updatedAt'],
+      lastLogin: json['lastLogin'],
+    );
+  }
+
+  static DateTime parseDate(dynamic value) {
+    if (value == null) return DateTime.now();
+    if (value is Timestamp) return value.toDate();
+    if (value is String) return DateTime.tryParse(value) ?? DateTime.now();
+    return DateTime.now();
   }
 }

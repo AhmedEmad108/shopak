@@ -1936,6 +1936,216 @@ class S {
     );
   }
 
+  /// `Details`
+  String get details {
+    return Intl.message('Details', name: 'details', desc: '', args: []);
+  }
+
+  /// `Details`
+  String get detail {
+    return Intl.message('Details', name: 'detail', desc: '', args: []);
+  }
+
+  /// `All Users`
+  String get all_users {
+    return Intl.message('All Users', name: 'all_users', desc: '', args: []);
+  }
+
+  /// `Active Users`
+  String get active_users {
+    return Intl.message(
+      'Active Users',
+      name: 'active_users',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inactive Users`
+  String get inactive_users {
+    return Intl.message(
+      'Inactive Users',
+      name: 'inactive_users',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search Users...`
+  String get search_users {
+    return Intl.message(
+      'Search Users...',
+      name: 'search_users',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search Users By Name or Email`
+  String get search_users_by_name_or_email {
+    return Intl.message(
+      'Search Users By Name or Email',
+      name: 'search_users_by_name_or_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this user?`
+  String get confirm_delete_message_user {
+    return Intl.message(
+      'Are you sure you want to delete this user?',
+      name: 'confirm_delete_message_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User deleted successfully`
+  String get user_deleted_successfully {
+    return Intl.message(
+      'User deleted successfully',
+      name: 'user_deleted_successfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role`
+  String get role {
+    return Intl.message('Role', name: 'role', desc: '', args: []);
+  }
+
+  /// `Status`
+  String get status {
+    return Intl.message('Status', name: 'status', desc: '', args: []);
+  }
+
+  /// `Created At`
+  String get created_at {
+    return Intl.message('Created At', name: 'created_at', desc: '', args: []);
+  }
+
+  /// `Updated At`
+  String get updated_at {
+    return Intl.message('Updated At', name: 'updated_at', desc: '', args: []);
+  }
+
+  /// `Last Login`
+  String get last_login {
+    return Intl.message('Last Login', name: 'last_login', desc: '', args: []);
+  }
+
+  /// `User ID`
+  String get user_id {
+    return Intl.message('User ID', name: 'user_id', desc: '', args: []);
+  }
+
+  /// `User Name`
+  String get user_name {
+    return Intl.message('User Name', name: 'user_name', desc: '', args: []);
+  }
+
+  /// `Email Verified`
+  String get email_verified {
+    return Intl.message(
+      'Email Verified',
+      name: 'email_verified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email Not Verified`
+  String get email_not_verified {
+    return Intl.message(
+      'Email Not Verified',
+      name: 'email_not_verified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is Email Verified`
+  String get is_email_verified {
+    return Intl.message(
+      'Is Email Verified',
+      name: 'is_email_verified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email Verification Status`
+  String get email_verification_status {
+    return Intl.message(
+      'Email Verification Status',
+      name: 'email_verification_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Addresses`
+  String get addresses {
+    return Intl.message('Addresses', name: 'addresses', desc: '', args: []);
+  }
+
+  /// `Delete User`
+  String get delete_user {
+    return Intl.message('Delete User', name: 'delete_user', desc: '', args: []);
+  }
+
+  /// `Change Status`
+  String get change_status {
+    return Intl.message(
+      'Change Status',
+      name: 'change_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User status changed successfully`
+  String get user_status_changed_successfully {
+    return Intl.message(
+      'User status changed successfully',
+      name: 'user_status_changed_successfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User`
+  String get user {
+    return Intl.message('User', name: 'user', desc: '', args: []);
+  }
+
+  /// `Seller`
+  String get seller {
+    return Intl.message('Seller', name: 'seller', desc: '', args: []);
+  }
+
+  /// `Admin`
+  String get admin {
+    return Intl.message('Admin', name: 'admin', desc: '', args: []);
+  }
+
+  /// `Change Role`
+  String get change_role {
+    return Intl.message('Change Role', name: 'change_role', desc: '', args: []);
+  }
+
+  /// `No Users Found`
+  String get no_users_found {
+    return Intl.message(
+      'No Users Found',
+      name: 'no_users_found',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name Vendor in English`
   String get name_vendor_en {
     return Intl.message(

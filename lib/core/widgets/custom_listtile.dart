@@ -22,16 +22,10 @@ class CustomListTile extends StatelessWidget {
       children: [
         ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: Icon(
-            icon,
-            color: color,
-            size: 30,
-          ),
-          title: Text(
-            title,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          trailing: trailing ??
+          leading: Icon(icon, color: color, size: 30),
+          title: Text(title, style: Theme.of(context).textTheme.bodyMedium),
+          trailing:
+              trailing ??
               const Icon(
                 Icons.chevron_right,
                 color: AppColor.primaryColor,
@@ -39,10 +33,7 @@ class CustomListTile extends StatelessWidget {
               ),
           onTap: onTap,
         ),
-        Divider(
-          color: Theme.of(context).colorScheme.secondary,
-          thickness: 1,
-        ),
+        Divider(color: Theme.of(context).colorScheme.secondary, thickness: 1),
       ],
     );
   }

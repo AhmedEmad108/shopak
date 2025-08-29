@@ -27,15 +27,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "Active Categories",
     ),
     "active_products": MessageLookupByLibrary.simpleMessage("Active Products"),
+    "active_users": MessageLookupByLibrary.simpleMessage("Active Users"),
     "add": MessageLookupByLibrary.simpleMessage("Add"),
     "add_address": MessageLookupByLibrary.simpleMessage("Add Address"),
     "add_category": MessageLookupByLibrary.simpleMessage("Add Categery"),
     "add_product": MessageLookupByLibrary.simpleMessage("Add Product"),
     "address": MessageLookupByLibrary.simpleMessage("Address"),
+    "addresses": MessageLookupByLibrary.simpleMessage("Addresses"),
+    "admin": MessageLookupByLibrary.simpleMessage("Admin"),
     "admin_panel": MessageLookupByLibrary.simpleMessage("Admin Panel"),
     "agree_continue": MessageLookupByLibrary.simpleMessage("Agree & Continue"),
     "all_categories": MessageLookupByLibrary.simpleMessage("All Categories"),
     "all_products": MessageLookupByLibrary.simpleMessage("All Products"),
+    "all_users": MessageLookupByLibrary.simpleMessage("All Users"),
     "already_have_an_account": MessageLookupByLibrary.simpleMessage(
       "Already have an account?",
     ),
@@ -69,6 +73,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "change_email": MessageLookupByLibrary.simpleMessage("Change Email"),
     "change_language": MessageLookupByLibrary.simpleMessage("Change Language"),
     "change_password": MessageLookupByLibrary.simpleMessage("Change Password"),
+    "change_role": MessageLookupByLibrary.simpleMessage("Change Role"),
+    "change_status": MessageLookupByLibrary.simpleMessage("Change Status"),
     "change_theme": MessageLookupByLibrary.simpleMessage("Change Theme"),
     "check_code": MessageLookupByLibrary.simpleMessage("Check Code"),
     "check_your_email": MessageLookupByLibrary.simpleMessage(
@@ -81,6 +87,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "confirm_delete_message_product": MessageLookupByLibrary.simpleMessage(
       "Are You Sure You Want To Delete This Product?",
+    ),
+    "confirm_delete_message_user": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this user?",
     ),
     "confirm_delete_title": MessageLookupByLibrary.simpleMessage(
       "Confirm Delete",
@@ -106,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "create_new_password": MessageLookupByLibrary.simpleMessage(
       "Create New Password",
     ),
+    "created_at": MessageLookupByLibrary.simpleMessage("Created At"),
     "current_password": MessageLookupByLibrary.simpleMessage(
       "Current Password",
     ),
@@ -115,6 +125,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "delete_category": MessageLookupByLibrary.simpleMessage("Delete Category"),
     "delete_product": MessageLookupByLibrary.simpleMessage("Delete Product"),
+    "delete_user": MessageLookupByLibrary.simpleMessage("Delete User"),
+    "detail": MessageLookupByLibrary.simpleMessage("Details"),
+    "details": MessageLookupByLibrary.simpleMessage("Details"),
     "device": MessageLookupByLibrary.simpleMessage("Device"),
     "device_language": MessageLookupByLibrary.simpleMessage("Device Language"),
     "device_mode": MessageLookupByLibrary.simpleMessage("Device Mode"),
@@ -133,6 +146,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "edit_product": MessageLookupByLibrary.simpleMessage("Edit Product"),
     "edit_profile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "email_not_verified": MessageLookupByLibrary.simpleMessage(
+      "Email Not Verified",
+    ),
+    "email_verification_status": MessageLookupByLibrary.simpleMessage(
+      "Email Verification Status",
+    ),
+    "email_verified": MessageLookupByLibrary.simpleMessage("Email Verified"),
     "empty_search_results": MessageLookupByLibrary.simpleMessage(
       "No search results",
     ),
@@ -217,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "inactive_products": MessageLookupByLibrary.simpleMessage(
       "Inactive Products",
     ),
+    "inactive_users": MessageLookupByLibrary.simpleMessage("Inactive Users"),
     "invalid_current_password": MessageLookupByLibrary.simpleMessage(
       "Invalid current password",
     ),
@@ -229,12 +250,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalid_username": MessageLookupByLibrary.simpleMessage(
       "Please enter a valid username",
     ),
+    "is_email_verified": MessageLookupByLibrary.simpleMessage(
+      "Is Email Verified",
+    ),
     "is_featured_item": MessageLookupByLibrary.simpleMessage(
       "Is Featured Item",
     ),
     "language_changed_to": MessageLookupByLibrary.simpleMessage(
       "Language changed to",
     ),
+    "last_login": MessageLookupByLibrary.simpleMessage("Last Login"),
     "le": MessageLookupByLibrary.simpleMessage("LE"),
     "light": MessageLookupByLibrary.simpleMessage("Light"),
     "light_mode": MessageLookupByLibrary.simpleMessage("Light Mode"),
@@ -272,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_products_found": MessageLookupByLibrary.simpleMessage(
       "No Products Found",
     ),
+    "no_users_found": MessageLookupByLibrary.simpleMessage("No Users Found"),
     "not_valid_address": MessageLookupByLibrary.simpleMessage(
       "Not Valid Address",
     ),
@@ -386,6 +412,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "resend_code": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "reset_password": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "role": MessageLookupByLibrary.simpleMessage("Role"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "save_changes_message": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to save these changes?",
@@ -396,6 +423,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "search_for_products": MessageLookupByLibrary.simpleMessage(
       "Search For Products",
+    ),
+    "search_users": MessageLookupByLibrary.simpleMessage("Search Users..."),
+    "search_users_by_name_or_email": MessageLookupByLibrary.simpleMessage(
+      "Search Users By Name or Email",
     ),
     "see_all": MessageLookupByLibrary.simpleMessage("See All"),
     "select_city": MessageLookupByLibrary.simpleMessage("Select Your City"),
@@ -408,6 +439,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "select_primary_address": MessageLookupByLibrary.simpleMessage(
       "Select Primary Address",
     ),
+    "seller": MessageLookupByLibrary.simpleMessage("Seller"),
     "sellers_requests": MessageLookupByLibrary.simpleMessage(
       "Sellers Requests",
     ),
@@ -431,6 +463,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "start_shopping": MessageLookupByLibrary.simpleMessage(
       "Start Your Shopping Journey With Shopak",
     ),
+    "status": MessageLookupByLibrary.simpleMessage("Status"),
     "successfully_created_account": MessageLookupByLibrary.simpleMessage(
       "Successfully created account",
     ),
@@ -453,6 +486,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Theme changed to",
     ),
     "update": MessageLookupByLibrary.simpleMessage("Update"),
+    "updated_at": MessageLookupByLibrary.simpleMessage("Updated At"),
+    "user": MessageLookupByLibrary.simpleMessage("User"),
+    "user_deleted_successfully": MessageLookupByLibrary.simpleMessage(
+      "User deleted successfully",
+    ),
+    "user_id": MessageLookupByLibrary.simpleMessage("User ID"),
+    "user_name": MessageLookupByLibrary.simpleMessage("User Name"),
+    "user_status_changed_successfully": MessageLookupByLibrary.simpleMessage(
+      "User status changed successfully",
+    ),
     "vendor_address": MessageLookupByLibrary.simpleMessage("Vendor Address"),
     "vendor_message": MessageLookupByLibrary.simpleMessage(
       "To become a seller, you need to fill out the form below. We will review your request and get back to you as soon as possible.",

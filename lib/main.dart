@@ -84,6 +84,14 @@ class MyApp extends StatelessWidget {
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
+                localeResolutionCallback: (locale, supportedLocales) {
+                  if (lang == 'system') {
+                    // خليه ياخد من السيستم
+                    return locale;
+                  }
+                  // غير كده امشي على اللي مختاره المستخدم
+                  return appLocale;
+                },
                 supportedLocales: S.delegate.supportedLocales,
                 locale: appLocale,
                 title: 'Shopak',

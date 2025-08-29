@@ -1,6 +1,7 @@
 import 'package:shopak/features/1-splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shopak/features/2-on_boaring/presentation/views/on_boarding_view.dart';
+import 'package:shopak/features/3-auth/domain/entities/user_entity.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_in_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/sign_up_view.dart';
 import 'package:shopak/features/3-auth/presentation/views/widgets/resetpassword/check_email_view.dart';
@@ -12,6 +13,8 @@ import 'package:shopak/features/5-profile/presentation/views/become_seller/becom
 import 'package:shopak/features/5-profile/presentation/views/chang_password/change_password_view.dart';
 import 'package:shopak/features/5-profile/presentation/views/edit_email/change_email_view.dart';
 import 'package:shopak/features/5-profile/presentation/views/edit_profile/edit_profile_view.dart';
+import 'package:shopak/features/6-admin_panel/presentation/views/widgets/manage_users/details_user_view.dart';
+import 'package:shopak/features/6-admin_panel/presentation/views/widgets/manage_users/manage_users_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -23,10 +26,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const SignInView());
     case (SignUpView.routeName):
       return MaterialPageRoute(builder: (context) => const SignUpView());
-    // case (TermsAndConditionsView.routeName):
-    //   return MaterialPageRoute(
-    //     builder: (context) => const TermsAndConditionsView(),
-    // );
+    case (UsersPage.routeName):
+      return MaterialPageRoute(builder: (context) => const UsersPage());
     case (MainView.routeName):
       return MaterialPageRoute(builder: (context) => const MainView());
 
@@ -35,16 +36,26 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
 
     case (VerifyCodeResetPassView.routeName):
       return MaterialPageRoute(
-          builder: (context) => VerifyCodeResetPassView(
-                email: settings.arguments as String,
-              ));
+        builder:
+            (context) =>
+                VerifyCodeResetPassView(email: settings.arguments as String),
+      );
 
     case (ResetPasswordView.routeName):
       return MaterialPageRoute(builder: (context) => const ResetPasswordView());
 
     case (SuccessResetPasswordView.routeName):
       return MaterialPageRoute(
-          builder: (context) => const SuccessResetPasswordView());
+        builder: (context) => const SuccessResetPasswordView(),
+      );
+    case (ManageUsersView.routeName):
+      return MaterialPageRoute(builder: (context) => const ManageUsersView());
+    case (DetailsUserView.routeName):
+      return MaterialPageRoute(
+        builder:
+            (context) =>
+                DetailsUserView(user: settings.arguments as UserEntity),
+      );
     // case (DashboardView.routeName):
     //   return MaterialPageRoute(builder: (context) => const DashboardView());
     // case (ProfileView.routeName):

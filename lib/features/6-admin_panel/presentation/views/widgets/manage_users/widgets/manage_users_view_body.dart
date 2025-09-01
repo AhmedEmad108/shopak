@@ -4,7 +4,6 @@ import 'package:shopak/contants.dart';
 import 'package:shopak/core/utils/app_color.dart';
 import 'package:shopak/core/widgets/custom_no_data_widgets.dart';
 import 'package:shopak/core/widgets/custom_stat_card.dart';
-import 'package:shopak/core/widgets/custom_text_field.dart';
 import 'package:shopak/features/3-auth/domain/entities/user_entity.dart';
 import 'package:shopak/features/6-admin_panel/presentation/cubit/all_users/all_users_cubit.dart';
 import 'package:shopak/features/6-admin_panel/presentation/views/widgets/manage_users/details_user_view.dart';
@@ -32,10 +31,18 @@ class ManageUsersViewBody extends StatefulWidget {
 
 class _ManageUsersViewBodyState extends State<ManageUsersViewBody> {
   final TextEditingController searchController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
+
   @override
   void dispose() {
     searchController.dispose();
+    scrollController.dispose();
     super.dispose();
+  }
+
+  Future<void> handleRefresh() async {
+    await context.read<AllUsersCubit>().refresh();
+    return Future.value();
   }
 
   @override
@@ -44,10 +51,10 @@ class _ManageUsersViewBodyState extends State<ManageUsersViewBody> {
 
     return RefreshIndicator(
       color: AppColor.primaryColor,
-      onRefresh: () => context.read<AllUsersCubit>().refresh(),
-
+      onRefresh: handleRefresh,
       child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
+        controller: scrollController,
+        physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
@@ -57,8 +64,7 @@ class _ManageUsersViewBodyState extends State<ManageUsersViewBody> {
               child: Column(
                 children: [
                   SizedBox(height: 20),
-                  newMethod(context),
-                  // CustomManageUserHeader(mycontroller: searchController),
+                  CustomManageUserHeader(searchController: searchController),
                   SizedBox(height: 10),
                   CustomStatCard(
                     activeCount: widget.activeCount,
@@ -82,103 +88,31 @@ class _ManageUsersViewBodyState extends State<ManageUsersViewBody> {
               padding: const EdgeInsets.symmetric(
                 horizontal: kHorizontalPadding,
               ),
-              sliver: SliverGrid.builder(
+              sliver: SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 5,
                   childAspectRatio: itemWidth * 1.7 / 803,
                 ),
-                itemCount: widget.users.length,
-                itemBuilder: (context, index) {
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final user = widget.users[index];
                   return CustomUserItem(
-                    user: widget.users[index],
+                    user: user,
                     view: widget.view,
                     onTapDetails: () {
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => BlocProvider.value(
-                                value: context.read<AllUsersCubit>(),
-                                child: DetailsUserView(
-                                  user: widget.users[index],
-                                ),
-                              ),
-                        ),
-                        // BlocProvider.value(
-                        //   value: context.read<AllUsersCubit>(),
-                        //   child: DetailsUserView(user: widget.users[index]),
-                        // ),
+                        DetailsUserView.routeName,
+                        arguments: user,
                       );
                     },
                   );
-                },
+                }, childCount: widget.users.length),
               ),
             ),
         ],
       ),
-    );
-  }
-
-  Row newMethod(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: CustomTextField(
-            controller: searchController,
-            hintText: S.of(context).search_users_by_name_or_email,
-            labels: S.of(context).search_users,
-            keyboardType: TextInputType.text,
-            prefixIcon: Icon(Icons.search),
-            suffixIcon: IconButton(
-              icon: const Icon(Icons.clear),
-              onPressed: () {
-                if (searchController.text.isNotEmpty) {
-                  searchController.clear();
-                  context.read<AllUsersCubit>().searchUsers('');
-                }
-              },
-            ),
-            onChanged: (value) {
-              context.read<AllUsersCubit>().searchUsers(value);
-            },
-          ),
-        ),
-
-        const SizedBox(width: 8),
-        PopupMenuButton<String>(
-          icon: const Icon(Icons.filter_list, size: 34),
-          onSelected: (value) {
-            switch (value) {
-              case 'all':
-                context.read<AllUsersCubit>().getAllUsers();
-                break;
-              case 'active':
-                context.read<AllUsersCubit>().getActiveUsers();
-                break;
-              case 'inactive':
-                context.read<AllUsersCubit>().getInactiveUsers();
-                break;
-            }
-          },
-          itemBuilder:
-              (context) => [
-                PopupMenuItem(
-                  value: 'all',
-                  child: Text(S.of(context).all_users),
-                ),
-                PopupMenuItem(
-                  value: 'active',
-                  child: Text(S.of(context).active_users),
-                ),
-                PopupMenuItem(
-                  value: 'inactive',
-                  child: Text(S.of(context).inactive_users),
-                ),
-              ],
-        ),
-      ],
     );
   }
 }

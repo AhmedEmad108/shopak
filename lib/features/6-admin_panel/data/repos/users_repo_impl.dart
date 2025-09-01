@@ -25,11 +25,9 @@ class UsersRepoImpl implements UsersRepo {
                 query: query,
               )
               as List<Map<String, dynamic>>;
-      List<UserModel> categories =
-          data.map((e) => UserModel.fromJson(e)).toList();
-      List<UserEntity> categoriesEntity =
-          categories.map((e) => e.toEntity()).toList();
-      return Right(categoriesEntity);
+      List<UserModel> users = data.map((e) => UserModel.fromJson(e)).toList();
+      List<UserEntity> user = users.map((e) => e.toEntity()).toList();
+      return Right(user);
     } catch (e) {
       return Left(ServerFailure(message: e.toString()));
     }

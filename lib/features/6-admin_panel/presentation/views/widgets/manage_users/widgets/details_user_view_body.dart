@@ -5,6 +5,7 @@ import 'package:shopak/core/utils/app_color.dart';
 import 'package:shopak/core/utils/app_style.dart';
 import 'package:shopak/core/widgets/custom_button.dart';
 import 'package:shopak/core/widgets/custom_image_picker.dart';
+import 'package:shopak/core/widgets/custom_snack_bar.dart';
 import 'package:shopak/features/3-auth/domain/entities/user_entity.dart';
 import 'package:shopak/features/6-admin_panel/presentation/cubit/all_users/all_users_cubit.dart';
 import 'package:shopak/generated/l10n.dart';
@@ -16,188 +17,208 @@ class DetailsUserViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            CustomImagePicker(
-              onFileChanged: (image) {},
-              radius: 70,
-              show: false,
-              urlImage: user.image,
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 2,
-              margin: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-                side: BorderSide(color: AppColor.grey, width: 1),
+    return BlocListener<AllUsersCubit, AllUsersState>(
+      listener: (context, state) {
+        if (state is EditUsersSuccess) {
+          Navigator.pop(context);
+        } else if (state is EditUsersFailed) {
+          customSnackBar(context, message: state.errMessage);
+        } else if (state is DeleteUsersSuccess) {
+          Navigator.pop(context);
+        } else if (state is DeleteUsersError) {
+          customSnackBar(context, message: state.errMessage);
+        }
+      },
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              CustomImagePicker(
+                onFileChanged: (image) {},
+                radius: 70,
+                show: false,
+                urlImage: user.image,
               ),
-              color: Theme.of(context).colorScheme.tertiary,
-              child: Table(
-                // border: TableBorder.all(color: AppColor.grey, width: 1),
-                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                border: TableBorder(
-                  horizontalInside: BorderSide(color: AppColor.grey, width: 1),
-                  verticalInside: BorderSide(color: AppColor.grey, width: 1),
+              SizedBox(height: 20),
+              Card(
+                elevation: 2,
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(color: AppColor.grey, width: 1),
                 ),
-                columnWidths: const {
-                  0: FlexColumnWidth(2),
-                  1: FlexColumnWidth(3),
-                },
+                color: Theme.of(context).colorScheme.tertiary,
+                child: Table(
+                  // border: TableBorder.all(color: AppColor.grey, width: 1),
+                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                  border: TableBorder(
+                    horizontalInside: BorderSide(
+                      color: AppColor.grey,
+                      width: 1,
+                    ),
+                    verticalInside: BorderSide(color: AppColor.grey, width: 1),
+                  ),
+                  columnWidths: const {
+                    0: FlexColumnWidth(2),
+                    1: FlexColumnWidth(3),
+                  },
+                  children: [
+                    buildRow(S.of(context).user_name, user.name),
+                    buildRow(S.of(context).email, user.email),
+                    buildRow(S.of(context).phone, user.phone),
+                    buildRow(S.of(context).role, user.role),
+                    buildRow(
+                      S.of(context).status,
+                      user.isActive
+                          ? S.of(context).active
+                          : S.of(context).inactive,
+                    ),
+                    buildRow(
+                      S.of(context).email_verification_status,
+                      user.isEmailVerified
+                          ? S.of(context).email_verified
+                          : S.of(context).email_not_verified,
+                    ),
+                    buildRow(
+                      S.of(context).created_at,
+                      DateFormatter.formatLocalizedDate(
+                        context,
+                        user.createdAt,
+                        pattern: 'yMMMMd',
+                      ),
+                    ),
+                    buildRow(
+                      S.of(context).updated_at,
+                      DateFormatter.formatLocalizedDate(
+                        context,
+                        user.updatedAt,
+                        pattern: 'yMMMMd',
+                      ),
+                    ),
+                    buildRow(
+                      S.of(context).last_login,
+                      DateFormatter.formatLocalizedDate(
+                        context,
+                        user.lastLogin,
+                        pattern: 'yMMMMd',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              if (user.address != null && user.address!.isNotEmpty) ...[
+                UserAddressesSection(user: user),
+                SizedBox(height: 10),
+              ],
+              Card(
+                elevation: 2,
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(color: AppColor.grey, width: 1),
+                ),
+                color: Theme.of(context).colorScheme.tertiary,
+                child: ListTile(
+                  leading: Icon(
+                    Icons.swap_horiz_outlined,
+                    color: AppColor.primaryColor,
+                  ),
+                  title: Text(
+                    S.of(context).change_role,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: DropdownButton<String>(
+                    value: user.role,
+                    underline: const SizedBox(),
+                    borderRadius: BorderRadius.circular(8),
+                    elevation: 0,
+                    items:
+                        roleList(context: context).map((lang) {
+                          return DropdownMenuItem<String>(
+                            value: lang.value,
+                            child: Text(
+                              lang.name,
+                              style: AppStyle.styleSemiBold22(),
+                            ),
+                          );
+                        }).toList(),
+                    onChanged: (value) async {
+                      if (value == null) return;
+                      // await context.read<AllUsersCubit>().updateUserStatus(
+                      //   userId: user.uId,
+                      //   newStatus: !user.isActive,
+                      // );
+                      // customSnackBar(
+                      //   context,
+                      //   message:
+                      //       '${newLang.language_changed_to} ${langList(context: context).firstWhere((lang) => lang.locale == value).name2}',
+                      // );
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Row(
                 children: [
-                  buildRow(S.of(context).user_name, user.name),
-                  buildRow(S.of(context).email, user.email),
-                  buildRow(S.of(context).phone, user.phone),
-                  buildRow(S.of(context).role, user.role),
-                  buildRow(
-                    S.of(context).status,
-                    user.isActive
-                        ? S.of(context).active
-                        : S.of(context).inactive,
-                  ),
-                  buildRow(
-                    S.of(context).email_verification_status,
-                    user.isEmailVerified
-                        ? S.of(context).email_verified
-                        : S.of(context).email_not_verified,
-                  ),
-                  buildRow(
-                    S.of(context).created_at,
-                    DateFormatter.formatLocalizedDate(
-                      context,
-                      user.createdAt,
-                      pattern: 'yMMMMd',
+                  Expanded(
+                    child: CustomButton(
+                      onTap: () {
+                        // context.read<AllUsersCubit>().updateUserStatus(
+                        //   userId: user.uId,
+                        //   newStatus: !user.isActive,
+                        // );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.swap_horiz_outlined,
+                            color: AppColor.white,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            S.of(context).change_status,
+                            style: AppStyle.styleBold24().copyWith(
+                              color: AppColor.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  buildRow(
-                    S.of(context).updated_at,
-                    DateFormatter.formatLocalizedDate(
-                      context,
-                      user.updatedAt,
-                      pattern: 'yMMMMd',
-                    ),
-                  ),
-                  buildRow(
-                    S.of(context).last_login,
-                    DateFormatter.formatLocalizedDate(
-                      context,
-                      user.lastLogin,
-                      pattern: 'yMMMMd',
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: CustomButton(
+                      onTap: () {},
+                      buttonColor: AppColor.red,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.delete_outline_rounded,
+                            color: AppColor.white,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            S.of(context).delete_user,
+                            style: AppStyle.styleBold24().copyWith(
+                              color: AppColor.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            SizedBox(height: 10),
-            if (user.address != null && user.address!.isNotEmpty) ...[
-              UserAddressesSection(user: user),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
             ],
-            Card(
-              elevation: 2,
-              margin: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-                side: BorderSide(color: AppColor.grey, width: 1),
-              ),
-              color: Theme.of(context).colorScheme.tertiary,
-              child: ListTile(
-                leading: Icon(
-                  Icons.swap_horiz_outlined,
-                  color: AppColor.primaryColor,
-                ),
-                title: Text(
-                  S.of(context).change_role,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
-                ),
-                trailing: DropdownButton<String>(
-                  value: user.role,
-                  underline: const SizedBox(),
-                  borderRadius: BorderRadius.circular(8),
-                  elevation: 0,
-                  items:
-                      roleList(context: context).map((lang) {
-                        return DropdownMenuItem<String>(
-                          value: lang.value,
-                          child: Text(
-                            lang.name,
-                            style: AppStyle.styleSemiBold22(),
-                          ),
-                        );
-                      }).toList(),
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    await context.read<AllUsersCubit>().editUserData(
-                      userEntity: user.copyWith(role: value),
-                    );
-                    // customSnackBar(
-                    //   context,
-                    //   message:
-                    //       '${newLang.language_changed_to} ${langList(context: context).firstWhere((lang) => lang.locale == value).name2}',
-                    // );
-                  },
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomButton(
-                    onTap: () {
-                      context.read<AllUsersCubit>().updateUserStatus(
-                        userId: user.uId,
-                        newStatus: !user.isActive,
-                      );
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.swap_horiz_outlined, color: AppColor.white),
-                        SizedBox(width: 8),
-                        Text(
-                          S.of(context).change_status,
-                          style: AppStyle.styleBold24().copyWith(
-                            color: AppColor.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: CustomButton(
-                    onTap: () {},
-                    buttonColor: AppColor.red,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.delete_outline_rounded,
-                          color: AppColor.white,
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          S.of(context).delete_user,
-                          style: AppStyle.styleBold24().copyWith(
-                            color: AppColor.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-          ],
+          ),
         ),
       ),
     );

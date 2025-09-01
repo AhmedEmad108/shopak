@@ -9,6 +9,7 @@ abstract class DatabaseService {
   Future<dynamic> getData({
     required String path,
     String? documentId,
+    Map<String, dynamic>? data,
     Map<String, dynamic>? query,
   });
 
@@ -18,10 +19,7 @@ abstract class DatabaseService {
     String? documentId,
   });
 
-  Future<void> deleteData({
-    required String path,
-    required String documentId,
-  });
+  Future<void> deleteData({required String path, required String documentId});
 
   Future<bool> checkIfDataExists({
     required String path,

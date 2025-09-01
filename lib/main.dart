@@ -12,6 +12,8 @@ import 'package:shopak/core/services/shared_prefrences_singletone.dart';
 import 'package:shopak/core/theme/theme.dart';
 import 'package:shopak/features/1-splash/presentation/views/splash_view.dart';
 import 'package:shopak/features/3-auth/domain/repos/auth_repo.dart';
+import 'package:shopak/features/6-admin_panel/domain/repos/users_repo.dart';
+import 'package:shopak/features/6-admin_panel/presentation/cubit/all_users/all_users_cubit.dart';
 import 'package:shopak/firebase_options.dart';
 import 'package:shopak/generated/l10n.dart';
 
@@ -46,6 +48,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UserCubit(getIt<AuthRepo>())),
         BlocProvider(
           create: (context) => UserCubit(getIt<AuthRepo>())..listenToUserData(),
+        ),
+        BlocProvider(
+          create: (context) => AllUsersCubit(getIt.get<UsersRepo>()),
         ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(

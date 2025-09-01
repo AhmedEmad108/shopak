@@ -8,7 +8,6 @@ import 'package:shopak/features/3-auth/data/repos/auth_repo_impl.dart';
 import 'package:shopak/features/3-auth/domain/repos/auth_repo.dart';
 import 'package:shopak/features/6-admin_panel/data/repos/users_repo_impl.dart';
 import 'package:shopak/features/6-admin_panel/domain/repos/users_repo.dart';
-import 'package:shopak/features/6-admin_panel/presentation/cubit/all_users/all_users_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -22,7 +21,7 @@ void setupGetIt() {
       databaseService: getIt<DatabaseService>(),
     ),
   );
-  getIt.registerSingleton<UsersRepo>(
-    UsersRepoImpl(databaseService: getIt<DatabaseService>()),
+  getIt.registerLazySingleton<UsersRepo>(
+    () => UsersRepoImpl(databaseService: getIt<DatabaseService>()),
   );
 }

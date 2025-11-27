@@ -105,6 +105,8 @@ class UserEntity {
       name: json['name'],
       phone: json['phone'],
       image: json['image'],
+      address: List<String>.from(json['address'] ?? []),
+      primaryIndex: json['primaryIndex'],
       isActive: json['isActive'],
       isEmailVerified: json['isEmailVerified'],
       role: json['role'],

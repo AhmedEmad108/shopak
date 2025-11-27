@@ -18,34 +18,27 @@ class CustomManageUserHeader extends StatelessWidget {
             hintText: S.of(context).search_users_by_name_or_email,
             labels: S.of(context).search_users,
             keyboardType: TextInputType.text,
-            prefixIcon: Icon(Icons.search),
+            prefixIcon: const Icon(Icons.search),
             suffixIcon:
                 searchController.text.isNotEmpty
                     ? IconButton(
                       icon: const Icon(Icons.clear),
                       onPressed: () {
-                        // نمسح النص ونقوم بالبحث بنص فارغ
                         searchController.clear();
                         context.read<AllUsersCubit>().searchUsers('');
                       },
                     )
                     : null,
-            // suffixIcon: IconButton(
-            //   icon: const Icon(Icons.clear),
-            //   onPressed: () {
-            //     if (searchController.text.isNotEmpty) {
-            //       searchController.clear();
-            //       context.read<AllUsersCubit>().searchUsers('');
-            //     }
-            //   },
-            // ),
             onChanged: (value) {
-              // Future.delayed(const Duration(milliseconds: 300), () {
-              // if (searchController.text == value) {
-              //   context.read<AllUsersCubit>().searchUsers(value);
-              // }
-              // // });
-              context.read<AllUsersCubit>().searchUsers(value);
+              Future.delayed(const Duration(milliseconds: 300), () {
+                if (searchController.text == value) {
+                  (searchController.text).isNotEmpty
+                      ? context.read<AllUsersCubit>().searchUsers(value)
+                      : null;
+                }
+              });
+
+              // context.read<AllUsersCubit>().searchUsers(value);
             },
           ),
         ),

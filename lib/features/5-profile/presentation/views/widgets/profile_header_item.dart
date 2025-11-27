@@ -5,8 +5,9 @@ import 'package:shopak/core/widgets/custom_image_picker.dart';
 import 'package:shopak/features/3-auth/domain/entities/user_entity.dart';
 
 class ProfileHeaderItem extends StatelessWidget {
-  const ProfileHeaderItem({super.key, required this.user});
+  const ProfileHeaderItem({super.key, required this.user, this.show = true});
   final UserEntity user;
+  final bool show;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class ProfileHeaderItem extends StatelessWidget {
         children: [
           CustomImagePicker(
             radius: 50,
+            show: show,
             urlImage: user.image,
             onFileChanged: (String? value) {
               context.read<UserCubit>().editUserImage(image: value!);
@@ -35,6 +37,7 @@ class ProfileHeaderItem extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Flexible(
                   child: FittedBox(
@@ -50,25 +53,24 @@ class ProfileHeaderItem extends StatelessWidget {
                     fit: BoxFit.scaleDown,
                     child: Text(
                       user.email,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      user.role,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),
                 ),
+                if (show)
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        user.role,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),

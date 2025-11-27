@@ -4,9 +4,10 @@ import 'package:shopak/contants.dart';
 import 'package:shopak/core/utils/app_color.dart';
 import 'package:shopak/core/utils/app_style.dart';
 import 'package:shopak/core/widgets/custom_button.dart';
-import 'package:shopak/core/widgets/custom_image_picker.dart';
 import 'package:shopak/core/widgets/custom_snack_bar.dart';
+import 'package:shopak/core/widgets/loading_dialog.dart';
 import 'package:shopak/features/3-auth/domain/entities/user_entity.dart';
+import 'package:shopak/features/5-profile/presentation/views/widgets/profile_header_item.dart';
 import 'package:shopak/features/6-admin_panel/presentation/cubit/all_users/all_users_cubit.dart';
 import 'package:shopak/generated/l10n.dart';
 import 'package:intl/intl.dart';
@@ -19,14 +20,36 @@ class DetailsUserViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AllUsersCubit, AllUsersState>(
       listener: (context, state) {
-        if (state is EditUsersSuccess) {
+        if (state is EditUsersLoading) {
+          loadingDialog(context);
+        } else if (state is EditUsersSuccess) {
+          customSnackBar(context, message: 'Updated Successfully');
+          Navigator.pop(context);
           Navigator.pop(context);
         } else if (state is EditUsersFailed) {
-          customSnackBar(context, message: state.errMessage);
-        } else if (state is DeleteUsersSuccess) {
+          customSnackBar(context, message: state.error);
           Navigator.pop(context);
-        } else if (state is DeleteUsersError) {
-          customSnackBar(context, message: state.errMessage);
+          Navigator.pop(context);
+        } else if (state is DeleteUsersLoading) {
+          loadingDialog(context);
+        } else if (state is DeleteUsersSuccess) {
+          customSnackBar(context, message: 'Deleted Successfully');
+          Navigator.pop(context);
+          Navigator.pop(context);
+        } else if (state is DeleteUsersFailed) {
+          customSnackBar(context, message: state.error);
+          Navigator.pop(context);
+          Navigator.pop(context);
+        } else if (state is UpdateUsersStatusLoading) {
+          loadingDialog(context);
+        } else if (state is UpdateUsersStatusSuccess) {
+          customSnackBar(context, message: 'Updated Successfully');
+          Navigator.pop(context);
+          Navigator.pop(context);
+        } else if (state is UpdateUsersStatusFailed) {
+          customSnackBar(context, message: state.error);
+          Navigator.pop(context);
+          Navigator.pop(context);
         }
       },
       child: SingleChildScrollView(
@@ -34,20 +57,13 @@ class DetailsUserViewBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
           child: Column(
             children: [
-              SizedBox(height: 20),
-              CustomImagePicker(
-                onFileChanged: (image) {},
-                radius: 70,
-                show: false,
-                urlImage: user.image,
-              ),
-              SizedBox(height: 20),
+              ProfileHeaderItem(user: user, show: false),
               Card(
                 elevation: 2,
                 margin: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(color: AppColor.grey, width: 1),
+                  // side: BorderSide(color: AppColor.grey, width: 1),
                 ),
                 color: Theme.of(context).colorScheme.tertiary,
                 child: Table(
@@ -65,8 +81,8 @@ class DetailsUserViewBody extends StatelessWidget {
                     1: FlexColumnWidth(3),
                   },
                   children: [
-                    buildRow(S.of(context).user_name, user.name),
-                    buildRow(S.of(context).email, user.email),
+                    // buildRow(S.of(context).user_name, user.name),
+                    // buildRow(S.of(context).email, user.email),
                     buildRow(S.of(context).phone, user.phone),
                     buildRow(S.of(context).role, user.role),
                     buildRow(
@@ -108,17 +124,17 @@ class DetailsUserViewBody extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               if (user.address != null && user.address!.isNotEmpty) ...[
                 UserAddressesSection(user: user),
-                SizedBox(height: 10),
+                SizedBox(height: 20),
               ],
               Card(
                 elevation: 2,
                 margin: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(color: AppColor.grey, width: 1),
+                  // side: BorderSide(color: AppColor.grey, width: 1),
                 ),
                 color: Theme.of(context).colorScheme.tertiary,
                 child: ListTile(
@@ -149,29 +165,23 @@ class DetailsUserViewBody extends StatelessWidget {
                         }).toList(),
                     onChanged: (value) async {
                       if (value == null) return;
-                      // await context.read<AllUsersCubit>().updateUserStatus(
-                      //   userId: user.uId,
-                      //   newStatus: !user.isActive,
-                      // );
-                      // customSnackBar(
-                      //   context,
-                      //   message:
-                      //       '${newLang.language_changed_to} ${langList(context: context).firstWhere((lang) => lang.locale == value).name2}',
-                      // );
+                      await context.read<AllUsersCubit>().editUserData(
+                        userEntity: user.copyWith(role: value),
+                      );
                     },
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
                     child: CustomButton(
                       onTap: () {
-                        // context.read<AllUsersCubit>().updateUserStatus(
-                        //   userId: user.uId,
-                        //   newStatus: !user.isActive,
-                        // );
+                        context.read<AllUsersCubit>().updateUserStatus(
+                          uId: user.uId,
+                          status: !user.isActive,
+                        );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -288,7 +298,7 @@ class UserAddressesSection extends StatelessWidget {
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
-        side: const BorderSide(color: AppColor.grey, width: 1),
+        // side: const BorderSide(color: AppColor.grey, width: 1),
       ),
       color: Theme.of(context).colorScheme.tertiary,
       child: ExpansionTile(

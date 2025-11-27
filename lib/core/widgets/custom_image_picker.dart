@@ -49,115 +49,74 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
             enabled: isLoading,
             child: CircleAvatar(
               radius: widget.radius + 2,
-              backgroundColor:
-                  widget.urlImage == null
-                      ? AppColor.grey
-                      : AppColor.darkPrimaryColor,
+              backgroundColor: (widget.urlImage == null || widget.urlImage!.isEmpty)
+                  ? AppColor.grey
+                  : AppColor.darkPrimaryColor,
               child: CircleAvatar(
                 radius: widget.radius,
                 backgroundColor: Theme.of(context).colorScheme.onPrimary,
                 child: ClipOval(
-                  child:
-                      url != null
-                          ? Image.network(
-                            url!,
-                            fit: BoxFit.cover,
-                            width: widget.radius * 2,
-                            height: widget.radius * 2,
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Icon(
-                                Icons.error_outline,
-                                color: Colors.red,
-                              );
-                            },
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value:
-                                      loadingProgress.expectedTotalBytes != null
-                                          ? loadingProgress
-                                                  .cumulativeBytesLoaded /
-                                              loadingProgress
-                                                  .expectedTotalBytes!
-                                          : null,
-                                ),
-                              );
-                            },
-                          )
-                          : widget.urlImage != null
-                          ? Image.network(
-                            widget.urlImage!,
-                            fit: BoxFit.cover,
-                            width: widget.radius * 2,
-                            height: widget.radius * 2,
-                            errorBuilder: (context, error, stackTrace) {
-                              print('Error loading image: $error');
-                              return const Icon(
-                                Icons.person,
-                                color: Colors.red,
-                              );
-                            },
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value:
-                                      loadingProgress.expectedTotalBytes != null
-                                          ? loadingProgress
-                                                  .cumulativeBytesLoaded /
-                                              loadingProgress
-                                                  .expectedTotalBytes!
-                                          : null,
-                                ),
-                              );
-                            },
-                          )
-                          : widget.auth == true
-                          ? Image.network(
-                            imageProfile,
-                            fit: BoxFit.cover,
-                            width: widget.radius * 2,
-                            height: widget.radius * 2,
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Icon(
-                                Icons.error_outline,
-                                color: Colors.red,
-                              );
-                            },
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value:
-                                      loadingProgress.expectedTotalBytes != null
-                                          ? loadingProgress
-                                                  .cumulativeBytesLoaded /
-                                              loadingProgress
-                                                  .expectedTotalBytes!
-                                          : null,
-                                ),
-                              );
-                            },
-                          )
-                          : _buildPlaceholderIcon(),
+                  child: _buildImageWidget(),
                 ),
               ),
             ),
           ),
         ),
-
-        widget.show == true ? _buildAddPhotoButton() : Container(),
-        widget.show == true ? _buildDeleteButton() : Container(),
+        if (widget.show) _buildAddPhotoButton(),
+        if (widget.show) _buildDeleteButton(),
       ],
+    );
+  }
+
+  Widget _buildImageWidget() {
+    final placeholder = _buildPlaceholderIcon();
+
+    // أول أولوية: الصورة اللي المستخدم لسه رفعها
+    if (url != null && url!.trim().isNotEmpty) {
+      return _networkImage(url!);
+    }
+
+    // تاني أولوية: الصورة اللي جايه من الـ props
+    if (widget.urlImage != null && widget.urlImage!.trim().isNotEmpty) {
+      return _networkImage(widget.urlImage!);
+    }
+
+    // تالت أولوية: صورة auth الافتراضية
+    if (widget.auth) {
+      return _networkImage(imageProfile);
+    }
+
+    // fallback: placeholder
+    return placeholder;
+  }
+
+  Widget _networkImage(String link) {
+    return Image.network(
+      link,
+      fit: BoxFit.cover,
+      width: widget.radius * 2,
+      height: widget.radius * 2,
+      errorBuilder: (context, error, stackTrace) {
+        debugPrint('Error loading image: $error');
+        return const Icon(Icons.person, color: Colors.red);
+      },
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Center(
+          child: CircularProgressIndicator(
+            value: loadingProgress.expectedTotalBytes != null
+                ? loadingProgress.cumulativeBytesLoaded /
+                    loadingProgress.expectedTotalBytes!
+                : null,
+          ),
+        );
+      },
     );
   }
 
   Future<void> pickImage() async {
     if (mounted) {
-      setState(() {
-        isLoading = true;
-      });
+      setState(() => isLoading = true);
     }
 
     try {
@@ -174,9 +133,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
 
         final fileSize = await imageFile!.length();
         if (fileSize > 5 * 1024 * 1024) {
-          throw Exception(
-            'حجم الصورة كبير جداً. يجب أن يكون أقل من 5 ميجابايت',
-          );
+          throw Exception('حجم الصورة كبير جداً. يجب أن يكون أقل من 5 ميجابايت');
         }
 
         url = await FireStorage().uploadFile(
@@ -193,28 +150,16 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
             backgroundColor: Colors.red,
           ),
         );
-        setState(() {
-          isLoading = false;
-        });
       }
     }
 
     if (mounted) {
-      setState(() {
-        isLoading = false;
-      });
+      setState(() => isLoading = false);
     }
   }
 
   Widget _buildPlaceholderIcon() {
-    return Visibility(
-      visible:
-          imageFile == null &&
-          widget.urlImage == null &&
-          url == null &&
-          widget.auth == false,
-      child: const Icon(Icons.image_outlined, color: AppColor.grey, size: 100),
-    );
+    return const Icon(Icons.image_outlined, color: AppColor.grey, size: 100);
   }
 
   Widget _buildAddPhotoButton() {
@@ -228,10 +173,9 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color:
-                isLoading
-                    ? AppColor.grey
-                    : widget.urlImage == null
+            color: isLoading
+                ? AppColor.grey
+                : (widget.urlImage == null || widget.urlImage!.isEmpty)
                     ? AppColor.grey3
                     : AppColor.lightPrimaryColor,
           ),
@@ -249,24 +193,22 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
       child: Visibility(
         visible: url != null,
         child: GestureDetector(
-          onTap:
-              isLoading
-                  ? null
-                  : () {
-                    setState(() {
-                      url = null;
-                      imageFile = null;
-                      widget.onFileChanged(null);
-                    });
-                  },
+          onTap: isLoading
+              ? null
+              : () {
+                  setState(() {
+                    url = null;
+                    imageFile = null;
+                    widget.onFileChanged(null);
+                  });
+                },
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color:
-                  isLoading
-                      ? AppColor.grey
-                      : url == null
+              color: isLoading
+                  ? AppColor.grey
+                  : url == null
                       ? AppColor.grey3
                       : AppColor.lightPrimaryColor,
             ),
@@ -277,3 +219,283 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
     );
   }
 }
+
+// import 'dart:io';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:flutter/material.dart';
+// import 'package:shopak/contants.dart';
+// import 'package:shopak/core/services/fire_storage.dart';
+// import 'package:shopak/core/utils/app_color.dart';
+// import 'package:shopak/core/utils/backend_endpoint.dart';
+// import 'package:skeletonizer/skeletonizer.dart';
+
+// class CustomImagePicker extends StatefulWidget {
+//   const CustomImagePicker({
+//     super.key,
+//     required this.onFileChanged,
+//     this.auth = false,
+//     this.urlImage,
+//     required this.radius,
+//     this.imageQuality = 50,
+//     this.show = true,
+//   });
+//   final ValueChanged<String?> onFileChanged;
+//   final bool auth;
+//   final String? urlImage;
+//   final double radius;
+//   final int? imageQuality;
+//   final bool show;
+
+//   @override
+//   State<CustomImagePicker> createState() => _CustomImagePickerState();
+// }
+
+// class _CustomImagePickerState extends State<CustomImagePicker> {
+//   bool isLoading = false;
+//   File? imageFile;
+//   String? url;
+
+//   @override
+//   void dispose() {
+//     imageFile = null;
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(
+//       clipBehavior: Clip.none,
+//       children: [
+//         Center(
+//           child: Skeletonizer(
+//             enabled: isLoading,
+//             child: CircleAvatar(
+//               radius: widget.radius + 2,
+//               backgroundColor:
+//                   widget.urlImage == null
+//                       ? AppColor.grey
+//                       : AppColor.darkPrimaryColor,
+//               child: CircleAvatar(
+//                 radius: widget.radius,
+//                 backgroundColor: Theme.of(context).colorScheme.onPrimary,
+//                 child: ClipOval(
+//                   child:
+//                       url != null
+//                           ? Image.network(
+//                             url!,
+//                             fit: BoxFit.cover,
+//                             width: widget.radius * 2,
+//                             height: widget.radius * 2,
+//                             errorBuilder: (context, error, stackTrace) {
+//                               return const Icon(
+//                                 Icons.error_outline,
+//                                 color: Colors.red,
+//                               );
+//                             },
+//                             loadingBuilder: (context, child, loadingProgress) {
+//                               if (loadingProgress == null) return child;
+//                               return Center(
+//                                 child: CircularProgressIndicator(
+//                                   value:
+//                                       loadingProgress.expectedTotalBytes != null
+//                                           ? loadingProgress
+//                                                   .cumulativeBytesLoaded /
+//                                               loadingProgress
+//                                                   .expectedTotalBytes!
+//                                           : null,
+//                                 ),
+//                               );
+//                             },
+//                           )
+//                           : widget.urlImage != null
+//                           ? Image.network(
+//                             widget.urlImage!,
+//                             fit: BoxFit.cover,
+//                             width: widget.radius * 2,
+//                             height: widget.radius * 2,
+//                             errorBuilder: (context, error, stackTrace) {
+//                               print('Error loading image: $error');
+//                               return const Icon(
+//                                 Icons.person,
+//                                 color: Colors.red,
+//                               );
+//                             },
+//                             loadingBuilder: (context, child, loadingProgress) {
+//                               if (loadingProgress == null) return child;
+//                               return Center(
+//                                 child: CircularProgressIndicator(
+//                                   value:
+//                                       loadingProgress.expectedTotalBytes != null
+//                                           ? loadingProgress
+//                                                   .cumulativeBytesLoaded /
+//                                               loadingProgress
+//                                                   .expectedTotalBytes!
+//                                           : null,
+//                                 ),
+//                               );
+//                             },
+//                           )
+//                           : widget.auth == true
+//                           ? Image.network(
+//                             imageProfile,
+//                             fit: BoxFit.cover,
+//                             width: widget.radius * 2,
+//                             height: widget.radius * 2,
+//                             errorBuilder: (context, error, stackTrace) {
+//                               return const Icon(
+//                                 Icons.error_outline,
+//                                 color: Colors.red,
+//                               );
+//                             },
+//                             loadingBuilder: (context, child, loadingProgress) {
+//                               if (loadingProgress == null) return child;
+//                               return Center(
+//                                 child: CircularProgressIndicator(
+//                                   value:
+//                                       loadingProgress.expectedTotalBytes != null
+//                                           ? loadingProgress
+//                                                   .cumulativeBytesLoaded /
+//                                               loadingProgress
+//                                                   .expectedTotalBytes!
+//                                           : null,
+//                                 ),
+//                               );
+//                             },
+//                           )
+//                           : _buildPlaceholderIcon(),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+
+//         widget.show == true ? _buildAddPhotoButton() : Container(),
+//         widget.show == true ? _buildDeleteButton() : Container(),
+//       ],
+//     );
+//   }
+
+//   Future<void> pickImage() async {
+//     if (mounted) {
+//       setState(() {
+//         isLoading = true;
+//       });
+//     }
+
+//     try {
+//       final ImagePicker picker = ImagePicker();
+//       final XFile? image = await picker.pickImage(
+//         source: ImageSource.gallery,
+//         imageQuality: widget.imageQuality,
+//         maxWidth: 1024,
+//         maxHeight: 1024,
+//       );
+
+//       if (image != null && mounted) {
+//         imageFile = File(image.path);
+
+//         final fileSize = await imageFile!.length();
+//         if (fileSize > 5 * 1024 * 1024) {
+//           throw Exception(
+//             'حجم الصورة كبير جداً. يجب أن يكون أقل من 5 ميجابايت',
+//           );
+//         }
+
+//         url = await FireStorage().uploadFile(
+//           file: imageFile!,
+//           path: BackendEndpoint.images,
+//         );
+//         widget.onFileChanged(url);
+//       }
+//     } catch (e) {
+//       if (mounted) {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(
+//             content: Text('حدث خطأ: ${e.toString()}'),
+//             backgroundColor: Colors.red,
+//           ),
+//         );
+//         setState(() {
+//           isLoading = false;
+//         });
+//       }
+//     }
+
+//     if (mounted) {
+//       setState(() {
+//         isLoading = false;
+//       });
+//     }
+//   }
+
+//   Widget _buildPlaceholderIcon() {
+//     return Visibility(
+//       visible:
+//           imageFile == null &&
+//           widget.urlImage == null &&
+//           url == null &&
+//           widget.auth == false,
+//       child: const Icon(Icons.image_outlined, color: AppColor.grey, size: 100),
+//     );
+//   }
+
+//   Widget _buildAddPhotoButton() {
+//     return Positioned(
+//       right: 0,
+//       left: 0,
+//       bottom: -15,
+//       child: GestureDetector(
+//         onTap: isLoading ? null : pickImage,
+//         child: Container(
+//           padding: const EdgeInsets.all(10),
+//           decoration: BoxDecoration(
+//             shape: BoxShape.circle,
+//             color:
+//                 isLoading
+//                     ? AppColor.grey
+//                     : widget.urlImage == null
+//                     ? AppColor.grey3
+//                     : AppColor.lightPrimaryColor,
+//           ),
+//           child: const Icon(Icons.add_a_photo_outlined, color: AppColor.black),
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget _buildDeleteButton() {
+//     return Positioned(
+//       right: 0,
+//       left: -110,
+//       top: 15,
+//       child: Visibility(
+//         visible: url != null,
+//         child: GestureDetector(
+//           onTap:
+//               isLoading
+//                   ? null
+//                   : () {
+//                     setState(() {
+//                       url = null;
+//                       imageFile = null;
+//                       widget.onFileChanged(null);
+//                     });
+//                   },
+//           child: Container(
+//             padding: const EdgeInsets.all(10),
+//             decoration: BoxDecoration(
+//               shape: BoxShape.circle,
+//               color:
+//                   isLoading
+//                       ? AppColor.grey
+//                       : url == null
+//                       ? AppColor.grey3
+//                       : AppColor.lightPrimaryColor,
+//             ),
+//             child: const Icon(Icons.delete_outlined, color: AppColor.black),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

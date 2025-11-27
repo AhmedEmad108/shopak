@@ -28,13 +28,13 @@ class CustomButtonContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(icon, color: AppColor.black),
+            Icon(icon, color: AppColor.black, size: 20),
             const SizedBox(width: 5),
             Text(
               text,
-              style: Theme.of(context).textTheme.titleSmall!.copyWith( 
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
                 color: AppColor.black,
-                fontWeight: FontWeight.bold,
+                // fontWeight: FontWeight.bold,
               ),
             ),
           ],

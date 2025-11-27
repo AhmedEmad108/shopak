@@ -154,8 +154,8 @@ class _CustomUserItemState extends State<CustomUserItem> {
                 value: widget.user.isActive,
                 onChanged: (value) {
                   context.read<AllUsersCubit>().updateUserStatus(
-                    userId: widget.user.uId,
-                    newStatus: value,
+                    uId: widget.user.uId,
+                    status: value,
                   );
                 },
                 activeColor: AppColor.primaryColor, // لون الزر عند التفعيل
@@ -181,7 +181,7 @@ class _CustomUserItemState extends State<CustomUserItem> {
       title: S.of(context).confirm_delete_title,
       content: S.of(context).confirm_delete_message_user,
       onPressed: () {
-        context.read<AllUsersCubit>().deleteUser(id: userId);
+        context.read<AllUsersCubit>().deleteUser( id: userId);
         setState(() {});
         Navigator.pop(context);
         showSnackBar(

@@ -1,3 +1,89 @@
+// part of 'all_users_cubit.dart';
+
+// abstract class AllUsersState extends Equatable {
+//   const AllUsersState();
+
+//   @override
+//   List<Object?> get props => [];
+// }
+
+// class AllUsersInitial extends AllUsersState {}
+
+// class GetUsersLoading extends AllUsersState {}
+
+// class GetUsersSuccess extends AllUsersState {
+//   final List<UserEntity> users;
+//   final ActiveInactive activeInactive;
+
+//   const GetUsersSuccess({
+//     required this.users,
+//     required this.activeInactive,
+//   });
+
+//   @override
+//   List<Object?> get props => [users, activeInactive];
+// }
+
+// class GetUsersFailed extends AllUsersState {
+//   final String error;
+
+//   const GetUsersFailed({required this.error});
+
+//   @override
+//   List<Object?> get props => [error];
+// }
+
+// /// تحديث الحالة
+// class UpdateUsersStatusLoading extends AllUsersState {}
+
+// class UpdateUsersStatusSuccess extends AllUsersState {}
+
+// class UpdateUsersStatusFailed extends AllUsersState {
+//   final String error;
+//   const UpdateUsersStatusFailed({required this.error});
+//   @override
+//   List<Object?> get props => [error];
+// }
+
+// /// تعديل بيانات
+// class EditUsersLoading extends AllUsersState {}
+
+// class EditUsersSuccess extends AllUsersState {}
+
+// class EditUsersFailed extends AllUsersState {
+//   final String error;
+//   const EditUsersFailed({required this.error});
+//   @override
+//   List<Object?> get props => [error];
+// }
+
+// /// حذف
+// class DeleteUsersLoading extends AllUsersState {}
+
+// class DeleteUsersSuccess extends AllUsersState {}
+
+// class DeleteUsersFailed extends AllUsersState {
+//   final String error;
+//   const DeleteUsersFailed({required this.error});
+//   @override
+//   List<Object?> get props => [error];
+// }
+
+// /// إحصائيات Active / Inactive
+// class ActiveInactive extends Equatable {
+//   final int active;
+//   final int inActive;
+
+//   const ActiveInactive({
+//     required this.active,
+//     required this.inActive,
+//   });
+
+//   @override
+//   List<Object?> get props => [active, inActive];
+// }
+
+
 part of 'all_users_cubit.dart';
 
 sealed class AllUsersState extends Equatable {
@@ -28,8 +114,8 @@ final class GetUsersFailed extends AllUsersState {
 final class EditUsersLoading extends AllUsersState {}
 
 final class EditUsersFailed extends AllUsersState {
-  final String errMessage;
-  const EditUsersFailed({required this.errMessage});
+  final String error;
+  const EditUsersFailed({required this.error});
 }
 
 final class EditUsersSuccess extends AllUsersState {}
@@ -39,9 +125,9 @@ final class DeleteUsersLoading extends AllUsersState {}
 
 final class DeleteUsersSuccess extends AllUsersState {}
 
-final class DeleteUsersError extends AllUsersState {
-  final String errMessage;
-  const DeleteUsersError({required this.errMessage});
+final class DeleteUsersFailed extends AllUsersState {
+  final String error;
+  const DeleteUsersFailed({required this.error});
 }
 
 // إضافة الحالات الجديدة للفلترة وتحديث الحالة
@@ -51,9 +137,9 @@ final class UpdateUsersStatusLoading extends AllUsersState {}
 
 final class UpdateUsersStatusSuccess extends AllUsersState {}
 
-final class UpdateUsersStatusFailure extends AllUsersState {
+final class UpdateUsersStatusFailed extends AllUsersState {
   final String error;
-  const UpdateUsersStatusFailure(this.error);
+  const UpdateUsersStatusFailed(this.error);
 }
 
 // حالات البحث

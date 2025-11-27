@@ -20,10 +20,8 @@ import 'package:shopak/generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = CustomBlocObserver();
-
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Prefs.init();
-
   String? lang = Prefs.getString('lang');
   if (lang == null || lang.isEmpty) {
     Prefs.setString('lang', 'system');
@@ -47,10 +45,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => UserCubit(getIt<AuthRepo>())),
         BlocProvider(
-          create: (context) => UserCubit(getIt<AuthRepo>())..listenToUserData(),
-        ),
-        BlocProvider(
-          create: (context) => AllUsersCubit(getIt.get<UsersRepo>()),
+          create: (context) => AllUsersCubit( 
+            getIt.get<UsersRepo>()
+            ),
         ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(

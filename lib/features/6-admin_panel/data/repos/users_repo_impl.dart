@@ -34,11 +34,11 @@ class UsersRepoImpl implements UsersRepo {
   }
 
   @override
-  Future<Either<Failures, void>> deleteUser({required String id}) async {
+  Future<Either<Failures, void>> deleteUser({required String uId}) async {
     try {
       await databaseService.deleteData(
         path: BackendEndpoint.userData,
-        documentId: id,
+        documentId: uId,
       );
       return const Right(null);
     } catch (e) {
@@ -48,13 +48,13 @@ class UsersRepoImpl implements UsersRepo {
 
   @override
   Future<Either<Failures, void>> updateUser({
-    required UserEntity userEntity,
+    required UserEntity user,
   }) async {
     try {
       await databaseService.updateData(
         path: BackendEndpoint.userData,
-        data: UserModel.fromEntity(userEntity).toJson(),
-        documentId: userEntity.uId,
+        data: UserModel.fromEntity(user).toJson(),
+        documentId: user.uId,
       );
       return const Right(null);
     } catch (e) {
@@ -64,14 +64,14 @@ class UsersRepoImpl implements UsersRepo {
 
   @override
   Future<Either<Failures, void>> updateUserStatus({
-    required String userId,
-    required bool newStatus,
+    required String uId,
+    required bool status,
   }) async {
     try {
       await databaseService.updateData(
         path: BackendEndpoint.userData,
-        documentId: userId,
-        data: {'isActive': newStatus},
+        documentId: uId,
+        data: {'isActive': status},
       );
       return const Right(null);
     } catch (e) {

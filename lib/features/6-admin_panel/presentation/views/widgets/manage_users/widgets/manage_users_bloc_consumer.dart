@@ -49,12 +49,12 @@ class _ManageUserBlocConsumerState extends State<ManageUserBlocConsumer> {
         } else if (state is EditUsersSuccess) {
           customSnackBar(context, message: 'Updated Successfully');
         } else if (state is EditUsersFailed) {
-          customSnackBar(context, message: state.errMessage);
+          customSnackBar(context, message: state.error);
         } else if (state is DeleteUsersSuccess) {
           customSnackBar(context, message: 'Deleted Successfully');
           Navigator.pop(context);
-        } else if (state is DeleteUsersError) {
-          customSnackBar(context, message: state.errMessage);
+        } else if (state is DeleteUsersFailed) {
+          customSnackBar(context, message: state.error);
         }
       },
       builder: (context, state) {

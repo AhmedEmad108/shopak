@@ -2,16 +2,16 @@ import 'package:dartz/dartz.dart';
 import 'package:shopak/core/errors/failures.dart';
 import 'package:shopak/features/3-auth/domain/entities/user_entity.dart';
 import 'package:shopak/features/6-admin_panel/data/repos/users_repo_impl.dart';
-
+ 
 abstract class UsersRepo {
   Future<Either<Failures, List<UserEntity>>> getUser({bool? status});
   Future<Either<Failures, void>> updateUser(
-      {required UserEntity userEntity});
-  Future<Either<Failures, void>> deleteUser({required String id});
+      {required UserEntity user});
+  Future<Either<Failures, void>> deleteUser({required String uId});
 
   Future<Either<Failures, void>> updateUserStatus({
-    required String userId,
-    required bool newStatus,
+    required String uId,
+    required bool status,
   });
   Future<Either<Failures, ActiveInactive>> getUserStats();
 

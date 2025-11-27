@@ -5,13 +5,13 @@ UserEntity getDummyProduct() {
     uId: '1',
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
-    email: '',
-    name: '',
-    phone: '',
-    image: '',
+    email: 'ahmedemad@gmail.com',
+    name: 'Ahmed Emad',
+    phone: '0123456789',
+    image: 'https://picsum.photos/200',
     isActive: true,
     isEmailVerified: true,
-    role: '',
+    role: 'user',
     lastLogin: DateTime.now(),
   );
 }

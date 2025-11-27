@@ -150,6 +150,8 @@ class UserModel extends UserEntity {
       name: name,
       phone: phone,
       image: image,
+      address: address,
+      primaryIndex: primaryIndex,
       isActive: isActive,
       isEmailVerified: isEmailVerified,
       role: role,
